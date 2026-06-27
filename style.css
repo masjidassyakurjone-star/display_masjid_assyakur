@@ -1,0 +1,392 @@
+/* ==========================================================================
+   STYLE.CSS - MASJID ASSYAKUR (ULTIMATE RESOLUTION-LOCK VIEWPORT V2)
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    background-color: #010f09;
+    color: #ffffff;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    padding: 1vh;
+    position: relative;
+}
+
+.signage-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* 1. BAGIAN HEADER (Tinggi: 14vh) */
+.main-header {
+    display: flex;
+    align-items: center;
+    background: rgba(11, 48, 28, 0.9);
+    border: 0.25vh solid #e5c158;
+    border-radius: 1vh;
+    padding: 1vh 2vw;
+    height: 14vh;
+    margin-bottom: 1vh;
+}
+
+.logo-container {
+    margin-right: 1.5vw;
+    display: flex;
+    align-items: center;
+}
+
+.logo-img {
+    height: 8vh;
+    width: auto;
+    object-fit: contain;
+}
+
+.title-container h1 {
+    color: #e5c158;
+    font-size: 3.8vh;
+    font-weight: 800;
+    letter-spacing: 0.05vw;
+    line-height: 1.2;
+}
+
+.title-container h2 {
+    font-size: 2.2vh;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1.2;
+}
+
+.title-container p {
+    font-size: 1.5vh;
+    color: #cccccc;
+    line-height: 1.2;
+}
+
+/* AREA KONTEN UTAMA TENGAH (Tinggi: 78vh) */
+.main-content {
+    display: flex;
+    height: 78vh;
+    max-height: 78vh;
+    gap: 1.5vw;
+    margin-bottom: 1vh;
+}
+
+.left-column {
+    width: 68vw;
+    height: 100%;
+    display: flex;
+}
+
+.right-column {
+    width: 32vw;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2vh;
+}
+
+.papan-informasi {
+    background: rgba(11, 48, 28, 0.9);
+    border: 0.25vh solid #e5c158;
+    border-radius: 1.2vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.papan-header {
+    background: rgba(0, 0, 0, 0.3);
+    border-bottom: 0.2vh solid #e5c158;
+    text-align: center;
+    padding: 1.2vh;
+    color: #e5c158;
+    font-weight: 700;
+    font-size: 2.4vh;
+    letter-spacing: 0.05vw;
+}
+
+.papan-body {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+    padding: 0 !important; 
+}
+
+.slide-container {
+    height: 100%;
+    width: 100%;
+    position: relative;
+}
+
+.slide {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    visibility: hidden;
+    transition: opacity 3000ms ease-in-out !important; 
+}
+
+.slide.active {
+    opacity: 1 !important;
+    visibility: visible !important;
+    position: relative;
+}
+
+.padded-slide-inner {
+    padding: 2.5vh 2vw;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.slide-stretched-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: fill !important; 
+    display: block;
+}
+
+/* Desain Tabel Kas */
+.table-responsive {
+    width: 100%;
+    overflow-y: auto;
+    max-height: 100%;
+}
+
+.table-kas {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 2.1vh;
+    margin-top: 1vh;
+}
+
+.table-kas th {
+    background-color: rgba(229, 193, 88, 0.25);
+    color: #e5c158;
+    font-weight: 700;
+    border: 0.18vh solid rgba(229, 193, 88, 0.4);
+    padding: 1.2vh;
+    text-align: center;
+}
+
+.table-kas td {
+    border: 0.18vh solid rgba(229, 193, 88, 0.3);
+    padding: 1.2vh 1.2vw;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+
+.scrollable-content {
+    overflow-y: auto;
+    height: 100%;
+}
+
+.scrollable-content::-webkit-scrollbar,
+.table-responsive::-webkit-scrollbar {
+    display: none !important;
+}
+
+.info-text-content {
+    font-family: 'Amiri', serif !important;
+    font-size: 4.2vh;
+    line-height: 1.7;
+    color: #f5f5f5;
+    white-space: pre-line;
+    padding: 1vh;
+    text-align: center;
+}
+
+/* ==========================================================================
+   SIDEBAR CARDS KANAN (PROPORSI & DOCKING)
+   ========================================================================== */
+.card {
+    background: rgba(11, 48, 28, 0.9);
+    border: 0.25vh solid #e5c158;
+    border-radius: 1vh;
+    padding: 1.5vh 1.5vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.card-countdown { flex: 1.1; }
+.card-clock { flex: 1; background: rgba(6, 27, 16, 0.98); }
+
+/* PERBESAR MAKSIMAL BOX REKENING KANAN (DIPADATKAN) */
+.card-rekening { 
+    flex: 1.1; /* Mengalokasikan sisa ruang vertikal lebih banyak */
+    padding: 2vh 1.5vw !important;
+}
+
+.card h3 {
+    color: #e5c158;
+    font-size: 2.2vh;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 0.5vh;
+}
+
+/* Modifikasi judul khusus box rekening agar kontras menonjol */
+.card-rekening h3 {
+    font-size: 2.6vh !important; /* Diperbesar */
+    font-weight: 800;
+    letter-spacing: 0.05vw;
+    margin-bottom: 1.5vh;
+}
+
+.time-main {
+    font-size: 7.5vh;
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1;
+    margin: 0.6vh 0;
+}
+
+.time-sub {
+    font-family: monospace;
+    background: rgba(255, 82, 82, 0.15);
+    border: 0.2vh solid #ff5252;
+    color: #ff5252;
+    padding: 0.4vh 1.8vw;
+    border-radius: 0.6vh;
+    font-size: 3vh;
+    font-weight: bold;
+}
+
+.clock-display {
+    font-size: 6vh;
+    font-weight: bold;
+    color: #e5c158;
+    margin-bottom: 0.4vh;
+    line-height: 1;
+}
+
+.date-display { font-size: 2.1vh; color: #ffffff; }
+.hijri-display {
+    background: #e5c158;
+    color: #0b301c;
+    padding: 0.5vh 1.5vw;
+    border-radius: 0.6vh;
+    font-weight: 700;
+    font-size: 1.8vh;
+    margin-top: 1vh;
+}
+
+/* ==========================================================================
+   PERUBAHAN TOTAL STRUKTUR INTERNAL BOX REKENING INFAQ
+   ========================================================================== */
+.rekening-box {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: 100%; /* Memaksimalkan tinggi kontainer */
+}
+
+.bank-name { 
+    font-size: 3.2vh !important; /* Diperbesar signifikan */
+    font-weight: 800; 
+    color: #ffffff; /* Menggunakan putih agar kontras bersih */
+    letter-spacing: 0.05vw;
+}
+
+.acc-number {
+    background: #000000 !important; /* Hitam pekat solid tanpa transparansi */
+    border: 0.3vh solid #e5c158 !important; /* Garis tepi emas dipertebal */
+    border-radius: 1.5vh !important;
+    padding: 1.2vh 2vw !important; /* Ditambahkan bantalan padding lebar */
+    font-size: 4.8vh !important; /* DI-SCALE UP MAKSIMAL (SANGAT MENYOLOK) */
+    font-weight: 900 !important; /* Huruf ekstra tebal */
+    letter-spacing: 0.12vw !important; /* Jarak antar digit dilonggarkan */
+    margin: 1.2vh 0 !important;
+    color: #e5c158 !important; /* Warna teks nomor rekening menjadi emas menyala */
+    font-family: monospace;
+    width: 100%;
+    box-shadow: inset 0 0 1vh rgba(229, 193, 88, 0.2);
+}
+
+.acc-owner { 
+    font-size: 2.4vh !important; /* Diperbesar */
+    color: #e5c158; /* Warna teks nama pemilik diubah menjadi emas */
+    font-weight: 700;
+    letter-spacing: 0.03vw;
+}
+
+/* ==========================================================================
+   4. BAGIAN RUNNING TEXT / FOOTER (Tinggi: 8vh)
+   ========================================================================== */
+.main-footer {
+    background: rgba(6, 27, 16, 0.98);
+    border: 0.25vh solid #e5c158;
+    border-radius: 1vh;
+    height: 8vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    width: 100%;
+    flex-shrink: 0;
+}
+
+.marquee-container { width: 100%; overflow: hidden; white-space: nowrap; }
+.marquee-text {
+    display: inline-block;
+    padding-left: 100%;
+    animation: marquee 180s linear infinite;
+    font-size: 3.2vh;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+@keyframes marquee {
+    0% { transform: translate3d(0, 0, 0); }
+    100% { transform: translate3d(-100%, 0, 0); }
+}
+
+/* Standby Khusyuk Screen */
+#sholat-standby-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: #000000;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 1500ms ease-in-out;
+}
+
+#sholat-standby-overlay.active { opacity: 1 !important; pointer-events: auto !important; }
+.standby-container { text-align: center; max-width: 85vw; }
+.standby-text-utama { font-size: 6vh; font-weight: 800; color: #e5c158; margin-bottom: 4vh; }
+.standby-text-sub { font-size: 4.2vh; color: #ffffff; font-style: italic; line-height: 1.5; margin-bottom: 5vh; }
+.standby-text-sub-2 {
+    font-size: 3vh; color: #ff5252; font-weight: 600; border: 0.25vh dashed #ff5252;
+    padding: 1.5vh 2.5vw; border-radius: 1vh; display: inline-block; background: rgba(255, 82, 82, 0.05);
+}

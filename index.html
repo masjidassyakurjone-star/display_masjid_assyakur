@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Display Masjid Assyakur v2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="signage-container">
+        
+        <header class="main-header">
+            <div class="logo-container">
+                <img src="logo.png" alt="Logo Masjid Assyakur" class="logo-img">
+            </div>
+            <div class="title-container">
+                <h1>MASJID ASSYAKUR</h1>
+                <h2>Kompleks Perumahan Pesona Aqila Regency</h2>
+                <p>Gg. Makassar RT.016 Desa Jone, Kabupaten Paser, Kalimantan Timur, 76251</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            
+            <section class="left-column">
+                <div class="papan-informasi">
+                    <div class="papan-header">PAPAN INFORMASI MASJID</div>
+                    <div class="papan-body">
+                        
+                        <div id="papan-slide-container" class="slide-container">
+                            <div class="slide active">Memuat informasi masjid...</div>
+                        </div>
+
+                        <div class="hidden-dom-elements" style="display: none !important;">
+                            <span id="jumat-tanggal"></span><span id="jumat-khatib"></span>
+                            <span id="jumat-imam"></span><span id="jumat-bilal"></span>
+                            <span id="kas-awal"></span><span id="kas-masuk"></span>
+                            <span id="kas-keluar"></span><span id="kas-saldo"></span>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <aside class="right-column">
+                
+                <div class="card card-countdown">
+                    <h3 id="countdown-title">WAKTU SHOLAT</h3>
+                    <div class="time-main" id="countdown-time">00:00</div>
+                    <div class="time-sub" id="countdown-timer">-00:00:00</div>
+                </div>
+
+                <div class="card card-clock">
+                    <h3>WAKTU SEKARANG</h3>
+                    <div class="clock-display" id="clock-time">00:00:00</div>
+                    <div class="date-display" id="clock-date">Memuat Tanggal...</div>
+                    <div class="hijri-display" id="clock-hijri">Memuat Hijriyah...</div>
+                </div>
+
+                <div class="card card-rekening">
+                    <h3>REKENING INFAQ MASJID</h3>
+                    <div class="rekening-box">
+                        <p class="bank-name">Bankaltimtara</p>
+                        <div class="acc-number">0022999117</div>
+                        <p class="acc-owner">An. Masjid Assyakur Jone</p>
+                    </div>
+                </div>
+
+            </aside>
+        </main>
+
+        <footer class="main-footer">
+            <div class="marquee-container">
+                <div class="marquee-text" id="running-text">Memuat informasi berjalan...</div>
+            </div>
+        </footer>
+
+    </div>
+
+    <div id="sholat-standby-overlay"></div>
+
+    <script src="jadwal_db.js"></script>
+    <script src="combined.js"></script>
+</body>
+</html>
