@@ -33,6 +33,41 @@
         <!-- WIDGET AREA (Jam Digital & Countdown Disederhanakan) -->
         <section class="time-widget-row">
             <!-- Jam Digital & info kalender -->
+            <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mobile Display Masjid Assyakur</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Hubungkan ke file CSS eksternal -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- OVERLAY WARNING ANTI-ROTASI LANDSCAPE -->
+    <div id="orientation-blocker">
+        <div style="font-size: 7vh; margin-bottom: 2vh;">📱</div>
+        <h2 style="color: #f0d17b; font-size: 3vh; font-weight: 800; margin-bottom: 1vh;">EFEKTIF PADA MODE PORTRAIT</h2>
+        <p style="font-size: 2vh; color: #a2bcae; font-weight: 500;">Mohon putar kembali handphone Anda ke posisi tegak (Vertikal) untuk melihat mading digital.</p>
+    </div>
+
+    <!-- KONTAINER UTAMA SIGNAGE PORTRAIT -->
+    <div class="signage-container-portrait">
+        
+        <!-- HEADER (Logo, Nama, Alamat) -->
+        <header class="main-header-portrait">
+            <img src="logo.png" alt="Logo" class="logo-img-portrait">
+            <div class="title-container-portrait">
+                <h1>MASJID ASSYAKUR</h1>
+                <div class="address-inline">Perumahan Pesona Aqila Regency Jone, GG. Makassar RT. 016 Desa Jone, TANAH GROGOT</div>
+            </div>
+        </header>
+
+        <!-- WIDGET AREA (Jam Digital & Countdown Disederhanakan) -->
+        <section class="time-widget-row">
+            <!-- Jam Digital & info kalender -->
             <div class="card-portrait card-clock-portrait">
                 <div class="clock-display" id="clock-time">04:31:12</div>
                 <div class="date-row">
@@ -40,6 +75,130 @@
                     <span class="hijri-display" id="clock-hijri">25 Muharram 1448 H</span>
                 </div>
             </div>
+            
+            <!-- Countdown Sholat Minimalis -->
+            <div class="card-portrait card-countdown-portrait">
+                <div class="countdown-sholat-name" id="countdown-title">Ashar</div>
+                <div class="time-main" id="countdown-time">00:17:35</div>
+            </div>
+        </section>
+
+        <!-- PAPAN INFORMASI MADING UTAMA (~60% Layar) -->
+        <section class="main-papan-portrait">
+            <div class="papan-header-portrait">PAPAN INFORMASI MASJID</div>
+            <div class="papan-body-portrait">
+                <div id="papan-slide-container" class="slide-container">
+                    <div id="slide-A" class="slide active"></div>
+                    <div id="slide-B" class="slide"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MANUAL CONTROL PANEL SLIDER -->
+        <div class="papan-control-panel">
+            <button class="ctrl-btn" onclick="kembaliSlideManual()">⏮️ Sebelumnya</button>
+            <button class="ctrl-btn" id="btn-pause-play" onclick="toggleJedaOtomatis()">⏸️ Jeda</button>
+            <button class="ctrl-btn" onclick="lanjutSlideManual()">Berikutnya ⏭️</button>
+        </div>
+
+        <!-- REKENING INFAQ MODEL CARD (Tanpa Border Putus-putus) -->
+        <section class="card-rekening-portrait">
+            <div class="rekening-title">INFAQ MASJID</div>
+            <div class="rekening-info-block">
+                <span class="bank-name">Bankaltimtara : </span>
+                <span class="acc-number">0022999117</span>
+            </div>
+        </section>
+
+        <!-- FOOTER RUNNING TEXT (Background Hitam Transparan) -->
+        <footer class="main-footer-portrait">
+            <div class="running-text-wrapper">
+                <span class="running-text-label">Kutipan Pilihan</span>
+                <div class="marquee-container">
+                    <marquee scrollamount="5" id="running-text">Memuat isi kutipan yang bergerak di sini...</marquee>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- OVERLAY STANDBY SHOLAT -->
+    <div id="sholat-standby-overlay"></div>
+
+    <!-- Sistem Skrip Pendukung -->
+    <script src="jadwal_db.js"></script>
+    <script src="combined.js"></script>
+
+    <script>
+        let isJedaManual = false;
+
+        function toggleJedaOtomatis() {
+            const btn = document.getElementById('btn-pause-play');
+            if (isModeSholatBerlangsung || isModeMenungguIqamah) return;
+
+            isJedaManual = !isJedaManual;
+            if (isJedaManual) {
+                if (slideTimeout) clearTimeout(slideTimeout);
+                if (scrollInterval) clearInterval(scrollInterval);
+                btn.innerHTML = "▶️ Putar";
+                btn.classList.add('active-status');
+            } else {
+                btn.innerHTML = "⏸️ Jeda";
+                btn.classList.remove('active-status');
+                currentSlideIndex++;
+                if (currentSlideIndex >= dataSlides.length) {
+                    bangunStrukturSlideAntrian();
+                } else {
+                    jalankanSiklusSlider();
+                }
+            }
+        }
+
+        function lanjutSlideManual() {
+            if (isModeSholatBerlangsung || isModeMenungguIqamah || dataSlides.length === 0) return;
+            if (slideTimeout) clearTimeout(slideTimeout);
+            if (scrollInterval) clearInterval(scrollInterval);
+
+            currentSlideIndex++;
+            if (currentSlideIndex >= dataSlides.length) { currentSlideIndex = 0; }
+            menggunakanSlideA = !menggunakanSlideA;
+            
+            const slideA = document.getElementById('slide-A');
+            const slideB = document.getElementById('slide-B');
+            let targetSlide = dataSlides[currentSlideIndex];
+            let kontainerBaru = menggunakanSlideA ? slideA : slideB;
+            let kontainerLama = menggunakanSlideA ? slideB : slideA;
+            kontainerBaru.innerHTML = targetSlide.html;
+            kontainerLama.classList.remove('active');
+            kontainerBaru.classList.add('active');
+
+            if (!isJedaManual) { jalankanSiklusSlider(); }
+        }
+
+        function kembaliSlideManual() {
+            if (isModeSholatBerlangsung || isModeMenungguIqamah || dataSlides.length === 0) return;
+            if (slideTimeout) clearTimeout(slideTimeout);
+            if (scrollInterval) clearInterval(scrollInterval);
+
+            currentSlideIndex--;
+            if (currentSlideIndex < 0) { currentSlideIndex = dataSlides.length - 1; }
+            menggunakanSlideA = !menggunakanSlideA;
+
+            const slideA = document.getElementById('slide-A');
+            const slideB = document.getElementById('slide-B');
+            let targetSlide = dataSlides[currentSlideIndex];
+            let kontainerBaru = menggunakanSlideA ? slideA : slideB;
+            let kontainerLama = menggunakanSlideA ? slideB : slideA;
+            kontainerBaru.innerHTML = targetSlide.html;
+            kontainerLama.classList.remove('active');
+            kontainerBaru.classList.add('active');
+
+            if (!isJedaManual) { jalankanSiklusSlider(); }
+        }
+    </script>
+</body>
+</html>
+
             
             <!-- Countdown Sholat Minimalis -->
             <div class="card-portrait card-countdown-portrait">
