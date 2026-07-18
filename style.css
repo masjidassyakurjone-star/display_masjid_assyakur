@@ -93,32 +93,7 @@ body {
     width: 50%;
 }
 
-/* Kiri: Jam Digital Jauh Lebih Besar */
-.card-clock-portrait .clock-display {
-    font-size: 4.2vh; /* Diperbesar signifikan */
-    font-weight: 800;
-    color: #3cf58d;
-    text-shadow: 0 0 1.5vh rgba(60, 245, 141, 0.4);
-    line-height: 1;
-}
 
-.card-clock-portrait .date-row {
-    display: flex;
-    gap: 1.5vw;
-    margin-top: 0.4vh;
-}
-
-.card-clock-portrait .date-display {
-    font-size: 1.5vh;
-    color: #ffffff;
-    font-weight: 600;
-}
-
-.card-clock-portrait .hijri-display {
-    font-size: 1.5vh;
-    color: #f0d17b;
-    font-weight: 700;
-}
 
 /* Kanan: Countdown Sederhana */
 .card-countdown-portrait .countdown-sholat-name {
