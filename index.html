@@ -14,34 +14,31 @@
     <!-- KONTAINER UTAMA SIGNAGE PORTRAIT -->
     <div class="signage-container-portrait">
         
-        <!-- HEADER (Logo, Nama, Alamat) -->
+        <!-- HEADER (Alamat Dipecah Jadi 2 Baris) -->
         <header class="main-header-portrait">
             <img src="logo.png" alt="Logo" class="logo-img-portrait">
             <div class="title-container-portrait">
                 <h1>MASJID ASSYAKUR</h1>
-                <div class="address-inline">Perumahan Pesona Aqila Regency Jone, GG. Makassar RT. 016 Desa Jone, TANAH GROGOT</div>
+                <div class="address-inline">
+                    Perumahan Pesona Aqila Regency Jone, GG. Makassar RT. 016 Desa Jone,<br>
+                    TANAH GROGOT
+                </div>
             </div>
         </header>
 
-        <!-- AREA WIDGET ATAS (3 Baris Vertikal Sempurna Kiri & Kanan) -->
+        <!-- AREA WIDGET ATAS -->
         <section class="time-widget-row">
-            <!-- WIDGET KIRI: Waktu & Kalender (3 Baris) -->
+            <!-- WIDGET KIRI: Waktu & Kalender -->
             <div class="card-portrait card-clock-portrait">
-                <!-- Baris 1: Jam -->
                 <div class="clock-display" id="clock-time">05:32:34</div>
-                <!-- Baris 2: Masehi -->
                 <div class="date-display" id="clock-date">Minggu, 19 Juli 2026</div>
-                <!-- Baris 3: Hijriyah -->
                 <div class="hijri-display" id="clock-hijri">2 Safar 1448 H</div>
             </div>
             
-            <!-- WIDGET KANAN: Countdown (3 Baris) -->
+            <!-- WIDGET KANAN: Countdown -->
             <div class="card-portrait card-countdown-portrait">
-                <!-- Baris 1: Judul/Status -->
                 <div class="countdown-status" id="countdown-title">MENUJU SHOLAT</div>
-                <!-- Baris 2: Nama Sholat -->
                 <div class="countdown-sholat-name" id="countdown-sholat">DZUHUR</div>
-                <!-- Baris 3: Countdown Waktu Aktif -->
                 <div class="time-main" id="countdown-time">00:17:35</div>
             </div>
         </section>
@@ -73,19 +70,18 @@
             </div>
         </section>
 
-        <!-- FOOTER RUNNING TEXT -->
+        <!-- FOOTER RUNNING TEXT (Modifikasi Struktur 2 Baris Vertikal) -->
         <footer class="main-footer-portrait">
             <div class="running-text-wrapper">
-                <span class="running-text-label">Kutipan Pilihan</span>
+                <div class="running-text-label">Kutipan Pilihan</div>
                 <div class="marquee-container">
-                    <marquee scrollamount="5" id="running-text">Memuat isi kutipan yang bergerak di sini...</marquee>
+                    <marquee scrollamount="5" id="running-text">Memuat isi kutipan yang bergerak di bawah sini dengan kapasitas ruang tampung karakter teks yang jauh lebih panjang...</marquee>
                 </div>
             </div>
         </footer>
 
     </div>
 
-    <!-- OVERLAY SHOLAT STANDBY -->
     <div id="sholat-standby-overlay"></div>
 
     <!-- Load Sistem Database & Javascript Utama -->
