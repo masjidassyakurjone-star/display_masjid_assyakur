@@ -2,78 +2,522 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Display Masjid Assyakur v2</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mobile Display Masjid Assyakur</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* ==========================================================================
+           STYLE PORTRAIT - MODUL MOBILE HP (NAVIGASI & FIX JUMAT RATA TENGAH VERTISAL)
+           ========================================================================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: #010f09;
+            color: #ffffff;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            padding: 1.5vh;
+        }
+
+        .signage-container-portrait {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            width: 100%;
+            gap: 1.2vh;
+        }
+
+        /* 1. HEADER PORTRAIT - TINGGI 10VH */
+        .main-header-portrait {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: rgba(11, 48, 28, 0.95);
+            border: 0.2vh solid #e5c158;
+            border-radius: 1vh;
+            padding: 0.5vh 2.5vw;
+            height: 10vh;
+            flex-shrink: 0;
+        }
+
+        .logo-img-portrait {
+            height: 6.5vh; 
+            width: auto;
+            margin-right: 2.5vw; 
+            object-fit: contain;
+            flex-shrink: 0;
+        }
+
+        .title-container-portrait {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            flex: 1;
+        }
+
+        .title-container-portrait h1 {
+            font-size: 2vh; 
+            color: #e5c158;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .title-container-portrait .address-inline {
+            font-size: 1.1vh; 
+            color: #a2bcae;
+            font-weight: 500;
+            line-height: 1.2;
+            margin-top: 0.1vh;
+        }
+
+        /* 2. AREA WIDGET WAKTU RATA TENGAH (Tinggi: 11vh) */
+        .time-widget-row {
+            display: flex;
+            gap: 1.5vw;
+            height: 11vh;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .card-portrait {
+            background: rgba(11, 48, 28, 0.9);
+            border: 0.2vh solid rgba(229, 193, 88, 0.4);
+            border-radius: 1vh;
+            padding: 0.5vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex: 1;
+            width: 50%;
+        }
+
+        .card-clock-portrait .clock-display {
+            font-size: 2.6vh;
+            font-weight: 800;
+            color: #2ecc71;
+            text-shadow: 0 0 1vh rgba(46, 204, 113, 0.3);
+            line-height: 1.1;
+        }
+
+        .card-clock-portrait .date-display {
+            font-size: 1.2vh;
+            color: #a2bcae;
+            font-weight: 600;
+        }
+
+        .card-clock-portrait .hijri-display {
+            font-size: 1.25vh;
+            color: #e5c158;
+            font-weight: 700;
+        }
+
+        .card-countdown-portrait h3 {
+            font-size: 1.2vh;
+            color: #e5c158;
+            font-weight: 700;
+        }
+
+        .card-countdown-portrait .time-main {
+            font-size: 2.6vh;
+            font-weight: 800;
+            line-height: 1.1;
+        }
+
+        .card-countdown-portrait .time-sub {
+            font-size: 1.5vh;
+            font-weight: 700;
+            color: #ff5252;
+            border: 0.15vh solid #ff5252;
+            padding: 0.1vh 1.5vw;
+            border-radius: 0.4vh;
+            background: rgba(255, 0, 0, 0.1);
+        }
+
+        /* 3. PAPAN INFORMASI SLIDER (Tinggi: 50vh) */
+        .main-papan-portrait {
+            display: flex;
+            flex-direction: column;
+            background: rgba(6, 27, 16, 0.85);
+            border: 0.25vh solid #e5c158;
+            border-radius: 1vh 1vh 0 0;
+            height: 50vh;
+            overflow: hidden;
+        }
+
+        .papan-header-portrait {
+            background: #0b301c;
+            color: #e5c158;
+            font-size: 2vh;
+            font-weight: 700;
+            text-align: center;
+            padding: 0.8vh 0;
+            border-bottom: 0.2vh solid #e5c158;
+            letter-spacing: 0.1vh;
+        }
+
+        .papan-body-portrait {
+            flex: 1;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        /* PANEL NAVIGASI MANUAL DI BAWAH PAPAN MADING */
+        .papan-control-panel {
+            display: flex;
+            background: #0b301c;
+            border: 0.25vh solid #e5c158;
+            border-top: none;
+            border-radius: 0 0 1vh 1vh;
+            height: 5vh;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .ctrl-btn {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 1.4vh;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            letter-spacing: 0.05vh;
+        }
+
+        .ctrl-btn:not(:last-child) {
+            border-right: 0.15vh solid rgba(229, 193, 88, 0.3);
+        }
+
+        .ctrl-btn:active { background: rgba(229, 193, 88, 0.2); }
+        .ctrl-btn.active-status { background: #ff5252; color: #ffffff; }
+
+        .slide-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 2000ms ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        /* 4. REKENING INFAQ (Tinggi: 9vh) */
+        .card-rekening-portrait {
+            height: 9vh;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .card-rekening-portrait h3 {
+            font-size: 1.3vh;
+            color: #e5c158;
+            margin-bottom: 0.2vh;
+        }
+
+        .rekening-box-portrait {
+            background: rgba(0, 0, 0, 0.4);
+            border: 0.15vh dashed rgba(229, 193, 88, 0.5);
+            border-radius: 0.6vh;
+            width: 100%;
+            padding: 0.5vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .rekening-box-portrait .acc-number {
+            font-size: 2.4vh;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 0.05vh;
+            line-height: 1.1;
+        }
+
+        .rekening-box-portrait .acc-owner {
+            font-size: 1.2vh;
+            color: #e5c158;
+        }
+
+        /* 5. FOOTER RUNNING TEXT */
+        .main-footer-portrait {
+            background: rgba(6, 27, 16, 0.98);
+            border: 0.2vh solid #e5c158;
+            border-radius: 0.8vh;
+            height: 5vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            width: 100%;
+            flex-shrink: 0;
+        }
+
+        .marquee-container { width: 100%; overflow: hidden; }
+        #running-text {
+            font-size: 2vh !important;
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            display: block !important;
+        }
+
+        /* LAYOUT INTERNAL KONTEN PAPAN */
+        .padded-slide-inner {
+            width: 100%;
+            height: 100%;
+            padding: 1.5vh 3vw;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide-stretched-img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .info-text-content {
+            font-family: 'Times New Roman', Times, serif !important;
+            font-size: 2.4vh !important;
+            line-height: 1.4;
+            color: #ffffff !important;
+            text-align: left;
+            font-weight: bold;
+            white-space: pre-wrap;
+            width: 100%;
+        }
+
+        .table-responsive { width: 100%; overflow-y: auto; flex: 1; }
+        .table-kas { width: 100%; border-collapse: collapse; font-size: 1.3vh !important; }
+        .table-kas th { background: #0b301c; color: #e5c158; padding: 0.6vh 1vw; border: 0.1vh solid rgba(229, 193, 88, 0.4); font-weight: 700; }
+        .table-kas td { padding: 0.6vh 1vw; border: 0.1vh solid rgba(229, 193, 88, 0.2); }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+        
+        /* ==========================================================================
+           REVISI TOTAL: MASTER CSS KONTEN SLIDE JUMAT (RATA TENGAH VERTIKAL HACK)
+           ========================================================================== */
+        [data-tipe="TEKS_JUMAT"] .padded-slide-inner, 
+        .padded-slide-inner:has(table:not(.table-kas)) {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important; /* Dorong rata tengah vertikal sempurna */
+            align-items: center !important;     /* Dorong rata tengah horizontal */
+            height: 100% !important;
+            padding: 2vh 5vw !important;
+        }
+
+        /* Baris 1: Judul Pengumumkan Jumat (Paksa 1 Baris) */
+        [data-tipe="TEKS_JUMAT"] div:first-child,
+        .padded-slide-inner:has(table:not(.table-kas)) div:first-child {
+            font-size: 2.8vh !important; /* Ukuran Font Besar */
+            color: #e5c158 !important;
+            font-weight: 800 !important;
+            text-align: center !important;
+            white-space: nowrap !important; /* Kunci mati 1 baris */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100% !important;
+            margin-bottom: 0.3vh !important;
+        }
+
+        /* Baris 2: Tanggal dan Jam (Paksa 1 Baris) */
+        [data-tipe="TEKS_JUMAT"] div:nth-child(2),
+        .padded-slide-inner:has(table:not(.table-kas)) div:nth-child(2) {
+            font-size: 2vh !important; /* Ukuran Font Menengah */
+            color: #ffffff !important;
+            font-weight: 600 !important;
+            text-align: center !important;
+            white-space: nowrap !important; /* Kunci mati 1 baris */
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100% !important;
+            margin-bottom: 2.5vh !important; /* Jarak aman ke tabel petugas */
+        }
+
+        /* Baris 3: Pembersihan Grid Tabel Petugas (Rata Tengah + Tanda Titik Dua Sejajar) */
+        [data-tipe="TEKS_JUMAT"] table,
+        .padded-slide-inner:has(table:not(.table-kas)) table {
+            font-size: 2.2vh !important;
+            width: auto !important; /* Menyesuaikan isi konten di tengah */
+            min-width: 85% !important;
+            max-width: 100% !important;
+            border-collapse: collapse !important;
+            margin: 0 auto !important; /* Center alignment */
+        }
+
+        /* Kolom 1: Petugas (Khatib, Imam, dll) */
+        [data-tipe="TEKS_JUMAT"] td:nth-child(1),
+        .padded-slide-inner:has(table:not(.table-kas)) td:nth-child(1) {
+            text-align: left !important;
+            font-weight: 700 !important;
+            color: #a2bcae !important;
+            padding: 0.6vh 1vw 0.6vh 0 !important;
+            white-space: nowrap !important;
+            width: 30% !important; /* Mengunci lebar kolom petugas agar titik dua sejajar lurus */
+        }
+
+        /* Kolom 2: Tanda Titik Dua (Kunci Mati agar Lurus Sejajar) */
+        [data-tipe="TEKS_JUMAT"] td:nth-child(2),
+        .padded-slide-inner:has(table:not(.table-kas)) td:nth-child(2) {
+            text-align: center !important;
+            font-weight: 700 !important;
+            color: #e5c158 !important;
+            padding: 0.6vh 1.5vw !important;
+            width: 5% !important;
+        }
+
+        /* Kolom 3: Nama Petugas */
+        [data-tipe="TEKS_JUMAT"] td:nth-child(3),
+        .padded-slide-inner:has(table:not(.table-kas)) td:nth-child(3) {
+            text-align: left !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
+            padding: 0.6vh 0 0.6vh 1vw !important;
+            word-wrap: break-word !important;
+        }
+
+        #sholat-standby-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000000; z-index: 9999; }
+    
+        /* ==========================================================================
+           PROTEKSI ANTI-ROTASI LANDSCAPE (OVERLAY BLOKIR)
+           ========================================================================== */
+        #landscape-warning {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: #010f09;
+            z-index: 99999;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 5vh 5vw;
+            box-sizing: border-box;
+        }
+
+        #landscape-warning .warning-icon {
+            font-size: 8vh;
+            color: #ff5252;
+            margin-bottom: 2vh;
+            animation: pulse-rotate 2s infinite ease-in-out;
+        }
+
+        #landscape-warning .warning-title {
+            font-size: 3.5vh;
+            color: #e5c158;
+            font-weight: 800;
+            margin-bottom: 1.5vh;
+            text-transform: uppercase;
+            letter-spacing: 0.2vh;
+        }
+
+        #landscape-warning .warning-text {
+            font-size: 2vh;
+            color: #a2bcae;
+            font-weight: 500;
+            line-height: 1.5;
+            max-width: 80%;
+        }
+
+        @media (orientation: landscape) {
+            .signage-container-portrait {
+                display: none !important;
+            }
+            #landscape-warning {
+                display: flex !important;
+            }
+        }
+
+        @keyframes pulse-rotate {
+            0% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+            50% { transform: scale(1.1) rotate(-90deg); opacity: 1; color: #e5c158; }
+            100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+        }
+</style>
 </head>
 <body>
 
-    <div class="signage-container">
+    <div class="signage-container-portrait">
         
-        <header class="main-header">
-            <div class="logo-container">
-                <img src="logo.png" alt="Logo Masjid Assyakur" class="logo-img">
-            </div>
-            <div class="title-container">
+        <header class="main-header-portrait">
+            <img src="logo.png" alt="Logo" class="logo-img-portrait">
+            <div class="title-container-portrait">
                 <h1>MASJID ASSYAKUR</h1>
-                <h2>Kompleks Perumahan Pesona Aqila Regency</h2>
-                <p>Gg. Makassar RT.016 Desa Jone, Kabupaten Paser, Kalimantan Timur, 76251</p>
+                <div class="address-inline">Perum. Pesona Aqila Regency, Gg. Makassar RT.016, Desa Jone, Paser, Kaltim</div>
             </div>
         </header>
 
-        <main class="main-content">
+        <section class="time-widget-row">
+            <div class="card-portrait card-clock-portrait">
+                <div class="clock-display" id="clock-time">00:00:00</div>
+                <div class="date-display" id="clock-date">Memuat Hari...</div>
+                <div class="hijri-display" id="clock-hijri">Memuat Hijriyah...</div>
+            </div>
             
-            <section class="left-column">
-                <div class="papan-informasi">
-                    <div class="papan-header">PAPAN INFORMASI MASJID</div>
-                    <div class="papan-body">
-                        
-                        <div id="papan-slide-container" class="slide-container">
-                            <div class="slide active">Memuat informasi masjid...</div>
-                        </div>
+            <div class="card-portrait card-countdown-portrait">
+                <h3 id="countdown-title">WAKTU SHOLAT</h3>
+                <div class="time-main" id="countdown-time">00:00</div>
+                <div class="time-sub" id="countdown-timer">-00:00:00</div>
+            </div>
+        </section>
 
-                        <div class="hidden-dom-elements" style="display: none !important;">
-                            <span id="jumat-tanggal"></span><span id="jumat-khatib"></span>
-                            <span id="jumat-imam"></span><span id="jumat-bilal"></span>
-                            <span id="kas-awal"></span><span id="kas-masuk"></span>
-                            <span id="kas-keluar"></span><span id="kas-saldo"></span>
-                        </div>
-
-                    </div>
+        <section class="main-papan-portrait">
+            <div class="papan-header-portrait">PAPAN INFORMASI MASJID</div>
+            <div class="papan-body-portrait">
+                <div id="papan-slide-container" class="slide-container">
+                    <div id="slide-A" class="slide active"></div>
+                    <div id="slide-B" class="slide"></div>
                 </div>
-            </section>
+            </div>
+        </section>
 
-            <aside class="right-column">
-                
-                <div class="card card-countdown">
-                    <h3 id="countdown-title">WAKTU SHOLAT</h3>
-                    <div class="time-main" id="countdown-time">00:00</div>
-                    <div class="time-sub" id="countdown-timer">-00:00:00</div>
-                </div>
+        <div class="papan-control-panel">
+            <button class="ctrl-btn" onclick="kembaliSlideManual()">⏮️ Sebelumnya</button>
+            <button class="ctrl-btn" id="btn-pause-play" onclick="toggleJedaOtomatis()">⏸️ Jeda</button>
+            <button class="ctrl-btn" onclick="lanjutSlideManual()">Berikutnya ⏭️</button>
+        </div>
 
-                <div class="card card-clock">
-                    <h3>WAKTU SEKARANG</h3>
-                    <div class="clock-display" id="clock-time">00:00:00</div>
-                    <div class="date-display" id="clock-date">Memuat Tanggal...</div>
-                    <div class="hijri-display" id="clock-hijri">Memuat Hijriyah...</div>
-                </div>
+        <section class="card-portrait card-rekening-portrait">
+            <h3>REKENING INFAQ MASJID</h3>
+            <div class="rekening-box-portrait">
+                <span class="acc-number">0022999117</span>
+                <span class="acc-owner">Bankaltimtara an. Masjid Assyakur Jone</span>
+            </div>
+        </section>
 
-                <div class="card card-rekening">
-                    <h3>REKENING INFAQ MASJID</h3>
-                    <div class="rekening-box">
-                        <p class="bank-name">Bankaltimtara</p>
-                        <div class="acc-number">0022999117</div>
-                        <p class="acc-owner">An. Masjid Assyakur Jone</p>
-                    </div>
-                </div>
-
-            </aside>
-        </main>
-
-        <footer class="main-footer">
+        <footer class="main-footer-portrait">
             <div class="marquee-container">
-                <div class="marquee-text" id="running-text">Memuat informasi berjalan...</div>
+                <marquee scrollamount="6" id="running-text">Memuat informasi berjalan...</marquee>
             </div>
         </footer>
 
@@ -83,5 +527,80 @@
 
     <script src="jadwal_db.js"></script>
     <script src="combined.js"></script>
+
+    <script>
+        let isJedaManual = false;
+
+        function toggleJedaOtomatis() {
+            const btn = document.getElementById('btn-pause-play');
+            if (isModeSholatBerlangsung || isModeMenungguIqamah) return;
+
+            isJedaManual = !isJedaManual;
+            if (isJedaManual) {
+                if (slideTimeout) clearTimeout(slideTimeout);
+                if (scrollInterval) clearInterval(scrollInterval);
+                btn.innerHTML = "▶️ Putar";
+                btn.classList.add('active-status');
+            } else {
+                btn.innerHTML = "⏸️ Jeda";
+                btn.classList.remove('active-status');
+                currentSlideIndex++;
+                if (currentSlideIndex >= dataSlides.length) {
+                    bangunStrukturSlideAntrian();
+                } else {
+                    jalankanSiklusSlider();
+                }
+            }
+        }
+
+        function lanjutSlideManual() {
+            if (isModeSholatBerlangsung || isModeMenungguIqamah || dataSlides.length === 0) return;
+            if (slideTimeout) clearTimeout(slideTimeout);
+            if (scrollInterval) clearInterval(scrollInterval);
+
+            currentSlideIndex++;
+            if (currentSlideIndex >= dataSlides.length) { currentSlideIndex = 0; }
+            menggunakanSlideA = !menggunakanSlideA;
+            
+            const slideA = document.getElementById('slide-A');
+            const slideB = document.getElementById('slide-B');
+            let targetSlide = dataSlides[currentSlideIndex];
+            let kontainerBaru = menggunakanSlideA ? slideA : slideB;
+            let kontainerLama = menggunakanSlideA ? slideB : slideA;
+            kontainerBaru.innerHTML = targetSlide.html;
+            kontainerLama.classList.remove('active');
+            kontainerBaru.classList.add('active');
+
+            if (!isJedaManual) { jalankanSiklusSlider(); }
+        }
+
+        function kembaliSlideManual() {
+            if (isModeSholatBerlangsung || isModeMenungguIqamah || dataSlides.length === 0) return;
+            if (slideTimeout) clearTimeout(slideTimeout);
+            if (scrollInterval) clearInterval(scrollInterval);
+
+            currentSlideIndex--;
+            if (currentSlideIndex < 0) { currentSlideIndex = dataSlides.length - 1; }
+            menggunakanSlideA = !menggunakanSlideA;
+
+            const slideA = document.getElementById('slide-A');
+            const slideB = document.getElementById('slide-B');
+            let targetSlide = dataSlides[currentSlideIndex];
+            let kontainerBaru = menggunakanSlideA ? slideA : slideB;
+            let kontainerLama = menggunakanSlideA ? slideB : slideA;
+            kontainerBaru.innerHTML = targetSlide.html;
+            kontainerLama.classList.remove('active');
+            kontainerBaru.classList.add('active');
+
+            if (!isJedaManual) { jalankanSiklusSlider(); }
+        }
+    </script>
+
+    <!-- OVERLAY WARNING ANTI-ROTASI LANDSCAPE -->
+    <div id="landscape-warning">
+        <div class="warning-icon">🔄</div>
+        <div class="warning-title">Mode Portrait Diperlukan</div>
+        <div class="warning-text">Aplikasi Signage Masjid Assyakur dirancang khusus untuk tampilan layar Vertikal (Portrait). Silakan putar kembali perangkat HP Anda ke posisi tegak.</div>
+    </div>
 </body>
 </html>
