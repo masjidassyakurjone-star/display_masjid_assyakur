@@ -95,20 +95,43 @@ body {
 
 
 
-/* Kanan: Countdown Sederhana */
-.card-countdown-portrait .countdown-sholat-name {
-    font-size: 2.2vh;
-    font-weight: 700;
-    color: #ffffff;
+/* Kanan: Card Countdown (3 Baris Vertikal) */
+.card-countdown-portrait {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.6vh; /* Jarak vertikal antar baris */
+    width: 50%;
 }
 
-.card-countdown-portrait .time-main {
-    font-size: 4.2vh; /* Menyeimbangkan besar jam digital di kiri */
+/* Baris 1: Status Atas */
+.card-countdown-portrait .countdown-status {
+    font-size: 1.6vh;
+    font-weight: 700;
+    color: #f0d17b; /* Warna Judul Emas Kuning */
+    letter-spacing: 0.05vh;
+    white-space: nowrap;
+}
+
+/* Baris 2: Nama Sholat */
+.card-countdown-portrait .countdown-sholat-name {
+    font-size: 2.4vh;
     font-weight: 800;
-    color: #3cf58d;
+    color: #ffffff; /* Putih Tegas */
+    letter-spacing: 0.1vh;
+    white-space: nowrap;
+}
+
+/* Baris 3: Angka Countdown/Jam Sholat */
+.card-countdown-portrait .time-main {
+    font-size: 4.2vh; /* Diperbesar sama dengan jam digital di kiri */
+    font-weight: 800;
+    color: #3cf58d; /* Warna Jam Hijau Terang */
     text-shadow: 0 0 1.5vh rgba(60, 245, 141, 0.4);
     line-height: 1;
-    margin-top: 0.2vh;
+    white-space: nowrap;
+}
 }
 
 /* 3. PAPAN INFORMASI UTAMA (Fokus Utama: 60% Layar) */
