@@ -1,6 +1,6 @@
 /* ==========================================================================
-   STYLE DISPLAY PORTRAIT - 1200 x 1920
-   Masjid Assyakur Signage
+   STYLE MONITOR PORTRAIT PERMANEN - 1200 x 1920 (ROTATED 90 DEGREE)
+   Masjid Assyakur Signage - OmVery
    ========================================================================== */
 
 * {
@@ -27,35 +27,29 @@ body {
     gap: 1.5vh;
 }
 
-/* 1. HEADER (Logo 9-10% Tinggi Layar) */
+/* 1. HEADER (Logo diposisikan presisi di bawah kubah background, tinggi 9.5%) */
 .main-header-portrait {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 14vh; /* Mengakomodasi tinggi logo & teks */
+    height: 14vh;
     flex-shrink: 0;
     padding: 1vh 0;
 }
 
 .logo-img-portrait {
-    height: 9.5vh; /* Kunci ukuran 9.5% tinggi layar */
+    height: 9.5vh; /* Konsisten 9-10% tinggi layar */
     width: auto;
     object-fit: contain;
     flex-shrink: 0;
     margin-bottom: 0.8vh;
 }
 
-.title-container-portrait {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
 .title-container-portrait h1 {
     font-size: 2.6vh; 
-    color: #f0d17b;
+    color: #f0d17b; /* Judul Emas */
     font-weight: 800;
     line-height: 1.1;
     letter-spacing: 0.1vh;
@@ -70,7 +64,7 @@ body {
     max-width: 90%;
 }
 
-/* 2. AREA WIDGET WAKTU & COUNTDOWN (Lebih Sederhana & Besar) */
+/* 2. AREA WIDGET WAKTU & COUNTDOWN (3 BARIS VERTIKAL KIRI-KANAN) */
 .time-widget-row {
     display: flex;
     gap: 2vw;
@@ -80,8 +74,8 @@ body {
 }
 
 .card-portrait {
-    background: rgba(7, 30, 20, 0.78);
-    border: 0.25vh solid #d8b35a;
+    background: rgba(7, 30, 20, 0.78); /* Card Transparan */
+    border: 0.25vh solid #d8b35a; /* Border Emas */
     border-radius: 1.2vh;
     padding: 1vh;
     display: flex;
@@ -93,55 +87,79 @@ body {
     width: 50%;
 }
 
-
-
-/* Kanan: Card Countdown (3 Baris Vertikal) */
-.card-countdown-portrait {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.6vh; /* Jarak vertikal antar baris */
-    width: 50%;
+/* --- KIRI: CARD JAM DIGITAL (3 Baris Vertikal Utuh) --- */
+.card-clock-portrait {
+    gap: 0.6vh;
 }
 
-/* Baris 1: Status Atas */
+.card-clock-portrait .clock-display {
+    font-size: 4.2vh; 
+    font-weight: 800;
+    color: #3cf58d; /* Jam Hijau */
+    text-shadow: 0 0 1.5vh rgba(60, 245, 141, 0.4);
+    line-height: 1;
+    width: 100%;
+    white-space: nowrap;
+}
+
+.card-clock-portrait .date-display {
+    font-size: 1.8vh; 
+    color: #ffffff; /* Masehi Putih */
+    font-weight: 600;
+    line-height: 1.2;
+    width: 100%;
+    white-space: nowrap;
+    display: block;
+}
+
+.card-clock-portrait .hijri-display {
+    font-size: 1.8vh; 
+    color: #f0d17b; /* Hijriyah Emas */
+    font-weight: 700;
+    line-height: 1.2;
+    width: 100%;
+    white-space: nowrap;
+    display: block;
+}
+
+/* --- KANAN: CARD COUNTDOWN (3 Baris Vertikal Utuh) --- */
+.card-countdown-portrait {
+    gap: 0.6vh;
+}
+
 .card-countdown-portrait .countdown-status {
     font-size: 1.6vh;
     font-weight: 700;
-    color: #f0d17b; /* Warna Judul Emas Kuning */
+    color: #f0d17b;
     letter-spacing: 0.05vh;
     white-space: nowrap;
 }
 
-/* Baris 2: Nama Sholat */
 .card-countdown-portrait .countdown-sholat-name {
     font-size: 2.4vh;
     font-weight: 800;
-    color: #ffffff; /* Putih Tegas */
+    color: #ffffff;
     letter-spacing: 0.1vh;
     white-space: nowrap;
 }
 
-/* Baris 3: Angka Countdown/Jam Sholat */
 .card-countdown-portrait .time-main {
-    font-size: 4.2vh; /* Diperbesar sama dengan jam digital di kiri */
+    font-size: 4.2vh; 
     font-weight: 800;
-    color: #3cf58d; /* Warna Jam Hijau Terang */
+    color: #3cf58d;
     text-shadow: 0 0 1.5vh rgba(60, 245, 141, 0.4);
     line-height: 1;
     white-space: nowrap;
 }
-}
 
-/* 3. PAPAN INFORMASI UTAMA (Fokus Utama: 60% Layar) */
+/* 3. PAPAN INFORMASI UTAMA (Fokus Utama: Tinggi Diatur ke 56vh ~ Sekitar 60% Layar) */
 .main-papan-portrait {
     display: flex;
     flex-direction: column;
     background: rgba(7, 30, 20, 0.78);
     border: 0.3vh solid #d8b35a;
     border-radius: 1.2vh 1.2vh 0 0;
-    height: 56vh; /* Dialokasikan total dengan kontrol agar pas ~60% */
+    height: 56vh; 
     overflow: hidden;
 }
 
@@ -162,7 +180,7 @@ body {
     overflow: hidden;
 }
 
-/* Panel Kontrol Navigasi */
+/* Panel Kontrol Slider */
 .papan-control-panel {
     display: flex;
     background: rgba(7, 30, 20, 0.9);
@@ -215,7 +233,7 @@ body {
     z-index: 2;
 }
 
-/* 4. REKENING INFAQ MASJID (Model Card, Tanpa Border Putus-Putus) */
+/* 4. REKENING INFAQ MASJID (Model Card Tanpa Border Putus-putus) */
 .card-rekening-portrait {
     height: 8.5vh;
     width: 100%;
@@ -234,7 +252,6 @@ body {
     font-size: 1.8vh;
     font-weight: 800;
     color: #f0d17b;
-    text-align: left;
 }
 
 .rekening-info-block {
@@ -254,7 +271,7 @@ body {
     line-height: 1.1;
 }
 
-/* 5. FOOTER RUNNING TEXT (Background Hitam Transparan) */
+/* 5. FOOTER RUNNING TEXT (Background Hitam Transparan Statis) */
 .main-footer-portrait {
     background: rgba(0, 0, 0, 0.75);
     border: 0.2vh solid #d8b35a;
@@ -275,7 +292,7 @@ body {
 }
 
 .running-text-label {
-    font-size: 1.2vh;
+    font-size: 1.4vh;
     color: #f0d17b;
     font-weight: 700;
     text-transform: uppercase;
@@ -297,7 +314,7 @@ body {
     display: block !important;
 }
 
-/* INTERNAL LAYOUT KONTEN MADING SLIDER */
+/* LAYOUT PAPAN INFORMASI SLIDER DALAM (JUMAT/KAS) */
 .padded-slide-inner {
     width: 100%;
     height: 100%;
@@ -317,7 +334,6 @@ body {
     font-size: 2.6vh !important;
     line-height: 1.5;
     color: #ffffff !important;
-    text-align: left;
     font-weight: bold;
     white-space: pre-wrap;
     width: 100%;
@@ -330,7 +346,7 @@ body {
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 
-/* CSS KONTEN JUMAT */
+/* LAYOUT TABEL JUMAT - RATA TENGAH VERTIKAL */
 [data-tipe="TEKS_JUMAT"] .padded-slide-inner, 
 .padded-slide-inner:has(table:not(.table-kas)) {
     display: flex !important;
@@ -406,23 +422,3 @@ body {
 }
 
 #sholat-standby-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000000; z-index: 9999; }
-
-/* ANTI ROTASI LANDSCAPE OVERLAY */
-#orientation-blocker {
-    display: none;
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    background: #0d3a2d;
-    z-index: 99999;
-    color: #ffffff;
-    text-align: center;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5vw;
-}
-
-@media screen and (orientation: landscape) and (max-width: 950px) {
-    #orientation-blocker { display: flex; }
-    .signage-container-portrait { display: none; }
-}
