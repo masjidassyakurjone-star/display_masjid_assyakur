@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mobile Display Masjid Assyakur</title>
+    <title>Display Masjid Assyakur - Portrait Monitor</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Hubungkan ke file CSS eksternal -->
+    <!-- Load CSS Eksternal -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -23,9 +23,9 @@
             </div>
         </header>
 
-        <!-- WIDGET AREA (Jam Digital & Countdown 3 Baris Vertikal) -->
+        <!-- AREA WIDGET ATAS (3 Baris Vertikal Sempurna Kiri & Kanan) -->
         <section class="time-widget-row">
-            <!-- Kiri: Jam Digital (3 Baris Vertikal Utuh) -->
+            <!-- WIDGET KIRI: Waktu & Kalender (3 Baris) -->
             <div class="card-portrait card-clock-portrait">
                 <!-- Baris 1: Jam -->
                 <div class="clock-display" id="clock-time">05:32:34</div>
@@ -35,13 +35,13 @@
                 <div class="hijri-display" id="clock-hijri">2 Safar 1448 H</div>
             </div>
             
-            <!-- Kanan: Countdown (3 Baris Vertikal Utuh) -->
+            <!-- WIDGET KANAN: Countdown (3 Baris) -->
             <div class="card-portrait card-countdown-portrait">
-                <!-- Baris 1: Status / Judul Atas -->
+                <!-- Baris 1: Judul/Status -->
                 <div class="countdown-status" id="countdown-title">MENUJU SHOLAT</div>
                 <!-- Baris 2: Nama Sholat -->
                 <div class="countdown-sholat-name" id="countdown-sholat">DZUHUR</div>
-                <!-- Baris 3: Waktu Hitung Mundur Aktif -->
+                <!-- Baris 3: Countdown Waktu Aktif -->
                 <div class="time-main" id="countdown-time">00:17:35</div>
             </div>
         </section>
@@ -57,14 +57,14 @@
             </div>
         </section>
 
-        <!-- MANUAL CONTROL PANEL SLIDER -->
+        <!-- MANUAL CONTROL PANEL -->
         <div class="papan-control-panel">
             <button class="ctrl-btn" onclick="kembaliSlideManual()">⏮️ Sebelumnya</button>
             <button class="ctrl-btn" id="btn-pause-play" onclick="toggleJedaOtomatis()">⏸️ Jeda</button>
             <button class="ctrl-btn" onclick="lanjutSlideManual()">Berikutnya ⏭️</button>
         </div>
 
-        <!-- REKENING INFAQ MODEL CARD (Tanpa Border Putus-putus) -->
+        <!-- REKENING INFAQ MODEL CARD -->
         <section class="card-rekening-portrait">
             <div class="rekening-title">INFAQ MASJID</div>
             <div class="rekening-info-block">
@@ -73,7 +73,7 @@
             </div>
         </section>
 
-        <!-- FOOTER RUNNING TEXT (Background Hitam Transparan) -->
+        <!-- FOOTER RUNNING TEXT -->
         <footer class="main-footer-portrait">
             <div class="running-text-wrapper">
                 <span class="running-text-label">Kutipan Pilihan</span>
@@ -85,10 +85,10 @@
 
     </div>
 
-    <!-- OVERLAY STANDBY SHOLAT -->
+    <!-- OVERLAY SHOLAT STANDBY -->
     <div id="sholat-standby-overlay"></div>
 
-    <!-- Sistem Skrip Pendukung -->
+    <!-- Load Sistem Database & Javascript Utama -->
     <script src="jadwal_db.js"></script>
     <script src="combined.js"></script>
 
