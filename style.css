@@ -24,17 +24,17 @@ body {
     flex-direction: column;
     height: 100%;
     width: 100%;
-    gap: 1.2vw; /* Jarak dirapatkan agar seluruh komponen naik */
+    gap: 1.2vw;
 }
 
-/* 1. HEADER (Dinaikkan tingginya menjadi 10.5vh & dipaksa alamat sebaris lurus) */
+/* 1. HEADER (Tinggi 10.5vh, Alamat sebaris penuh aman) */
 .main-header-portrait {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 10.5vh; /* Disesuaikan agar naik dan pas */
+    height: 10.5vh;
     flex-shrink: 0;
     padding: 0.5vh 2vw;
     background: rgba(7, 30, 20, 0.65);
@@ -60,17 +60,17 @@ body {
 }
 
 .title-container-portrait .address-inline {
-    font-size: 1.1vh; /* Dikecilkan sedikit agar pas sebaris */
+    font-size: 1.1vh; 
     color: #ffffff; 
     font-weight: 600;
     line-height: 1.2;
     margin-top: 0.2vh;
     width: 100%;
-    white-space: nowrap; /* Dipaksa 1 baris lurus saja, tidak boleh patah ke bawah */
+    white-space: nowrap;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
 }
 
-/* 2. AREA WIDGET WAKTU & COUNTDOWN (3 BARIS VERTIKAL KIRI-KANAN) */
+/* 2. AREA WIDGET WAKTU & COUNTDOWN (3 BARIS VERTIKAL) */
 .time-widget-row {
     display: flex;
     gap: 2vw;
@@ -93,11 +93,7 @@ body {
     width: 50%;
 }
 
-/* --- KIRI: CARD JAM DIGITAL --- */
-.card-clock-portrait {
-    gap: 0.6vh;
-}
-
+.card-clock-portrait { gap: 0.6vh; }
 .card-clock-portrait .clock-display {
     font-size: 4.2vh; 
     font-weight: 800;
@@ -107,48 +103,12 @@ body {
     width: 100%;
     white-space: nowrap;
 }
+.card-clock-portrait .date-display { font-size: 1.8vh; color: #ffffff; font-weight: 600; line-height: 1.2; width: 100%; white-space: nowrap; display: block; }
+.card-clock-portrait .hijri-display { font-size: 1.8vh; color: #f0d17b; font-weight: 700; line-height: 1.2; width: 100%; white-space: nowrap; display: block; }
 
-.card-clock-portrait .date-display {
-    font-size: 1.8vh; 
-    color: #ffffff; 
-    font-weight: 600;
-    line-height: 1.2;
-    width: 100%;
-    white-space: nowrap;
-    display: block;
-}
-
-.card-clock-portrait .hijri-display {
-    font-size: 1.8vh; 
-    color: #f0d17b; 
-    font-weight: 700;
-    line-height: 1.2;
-    width: 100%;
-    white-space: nowrap;
-    display: block;
-}
-
-/* --- KANAN: CARD COUNTDOWN --- */
-.card-countdown-portrait {
-    gap: 0.6vh;
-}
-
-.card-countdown-portrait .countdown-status {
-    font-size: 1.6vh;
-    font-weight: 700;
-    color: #f0d17b;
-    letter-spacing: 0.05vh;
-    white-space: nowrap;
-}
-
-.card-countdown-portrait .countdown-sholat-name {
-    font-size: 2.4vh;
-    font-weight: 800;
-    color: #ffffff;
-    letter-spacing: 0.1vh;
-    white-space: nowrap;
-}
-
+.card-countdown-portrait { gap: 0.6vh; }
+.card-countdown-portrait .countdown-status { font-size: 1.6vh; font-weight: 700; color: #f0d17b; letter-spacing: 0.05vh; white-space: nowrap; }
+.card-countdown-portrait .countdown-sholat-name { font-size: 2.4vh; font-weight: 800; color: #ffffff; letter-spacing: 0.1vh; white-space: nowrap; }
 .card-countdown-portrait .time-main {
     font-size: 4.2vh; 
     font-weight: 800;
@@ -158,7 +118,7 @@ body {
     white-space: nowrap;
 }
 
-/* 3. PAPAN INFORMASI UTAMA (Tinggi 56vh ~ Sekitar 60% Layar) */
+/* 3. PAPAN INFORMASI UTAMA (~60% Layar) */
 .main-papan-portrait {
     display: flex;
     flex-direction: column;
@@ -210,35 +170,15 @@ body {
     justify-content: center;
 }
 
-.ctrl-btn:not(:last-child) {
-    border-right: 0.2vh solid rgba(216, 179, 90, 0.3);
-}
-
+.ctrl-btn:not(:last-child) { border-right: 0.2vh solid rgba(216, 179, 90, 0.3); }
 .ctrl-btn:active { background: rgba(216, 179, 90, 0.2); }
 .ctrl-btn.active-status { background: #ff5252; color: #ffffff; }
 
-.slide-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-}
+.slide-container { position: relative; width: 100%; height: 100%; overflow: hidden; }
+.slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 2000ms ease-in-out; display: flex; flex-direction: column; }
+.slide.active { opacity: 1; z-index: 2; }
 
-.slide {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0;
-    transition: opacity 2000ms ease-in-out;
-    display: flex;
-    flex-direction: column;
-}
-
-.slide.active {
-    opacity: 1;
-    z-index: 2;
-}
-
-/* 4. REKENING INFAQ MASJID (Model Card) */
+/* 4. REKENING INFAQ MASJID */
 .card-rekening-portrait {
     height: 8.5vh;
     width: 100%;
@@ -253,35 +193,17 @@ body {
     padding: 0 4vw;
 }
 
-.rekening-title {
-    font-size: 1.8vh;
-    font-weight: 800;
-    color: #f0d17b;
-}
+.rekening-title { font-size: 1.8vh; font-weight: 800; color: #f0d17b; }
+.rekening-info-block { text-align: right; }
+.rekening-info-block .bank-name { font-size: 1.4vh; color: #a2bcae; font-weight: 600; }
+.rekening-info-block .acc-number { font-size: 2.6vh; font-weight: 800; color: #3cf58d; line-height: 1.1; }
 
-.rekening-info-block {
-    text-align: right;
-}
-
-.rekening-info-block .bank-name {
-    font-size: 1.4vh;
-    color: #a2bcae;
-    font-weight: 600;
-}
-
-.rekening-info-block .acc-number {
-    font-size: 2.6vh;
-    font-weight: 800;
-    color: #3cf58d;
-    line-height: 1.1;
-}
-
-/* 5. FOOTER RUNNING TEXT (Modifikasi 2 Baris Vertikal) */
+/* 5. FOOTER RUNNING TEXT 2 BARIS VERTIKAL */
 .main-footer-portrait {
     background: rgba(0, 0, 0, 0.75);
     border: 0.2vh solid #d8b35a;
     border-radius: 0.8vh;
-    height: 7.5vh; /* Ditambah ruang agar memuat 2 baris vertikal */
+    height: 7.5vh; 
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -292,7 +214,7 @@ body {
 
 .running-text-wrapper {
     display: flex;
-    flex-direction: column; /* Baris atas dan baris bawah */
+    flex-direction: column; 
     align-items: flex-start;
     width: 100%;
     height: 100%;
@@ -311,44 +233,13 @@ body {
     text-align: left;
 }
 
-.marquee-container { 
-    width: 100%; 
-    overflow: hidden; 
-    margin-top: 0.2vh;
-}
+.marquee-container { width: 100%; overflow: hidden; margin-top: 0.2vh; }
+#running-text { font-size: 2.3vh !important; color: #ffffff !important; font-weight: 600 !important; display: block !important; }
 
-#running-text {
-    font-size: 2.3vh !important; 
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    display: block !important;
-}
-
-/* LAYOUT PAPAN INFORMASI SLIDER DALAM (JUMAT/KAS) */
-.padded-slide-inner {
-    width: 100%;
-    height: 100%;
-    padding: 2vh 4vw;
-    display: flex;
-    flex-direction: column;
-}
-
-.slide-stretched-img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.info-text-content {
-    font-family: 'Times New Roman', Times, serif !important;
-    font-size: 2.6vh !important;
-    line-height: 1.5;
-    color: #ffffff !important;
-    font-weight: bold;
-    white-space: pre-wrap;
-    width: 100%;
-}
-
+/* LAYOUT PAPAN SLIDER KONTEN */
+.padded-slide-inner { width: 100%; height: 100%; padding: 2vh 4vw; display: flex; flex-direction: column; }
+.slide-stretched-img { width: 100%; height: 100%; object-fit: contain; }
+.info-text-content { font-family: 'Times New Roman', Times, serif !important; font-size: 2.6vh !important; line-height: 1.5; color: #ffffff !important; font-weight: bold; white-space: pre-wrap; width: 100%; }
 .table-responsive { width: 100%; overflow-y: auto; flex: 1; }
 .table-kas { width: 100%; border-collapse: collapse; font-size: 1.5vh !important; }
 .table-kas th { background: rgba(7, 30, 20, 0.9); color: #f0d17b; padding: 0.8vh 1vw; border: 0.1vh solid #d8b35a; font-weight: 700; }
@@ -356,80 +247,28 @@ body {
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 
-/* LAYOUT TABEL JUMAT - TULISAN DIKECILKAN */
+/* TABEL JUMAT */
 [data-tipe="TEKS_JUMAT"] .padded-slide-inner, 
 .padded-slide-inner:has(table:not(.table-kas)) {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important; 
-    align-items: center !important;     
-    height: 100% !important;
-    padding: 2vh 5vw !important;
+    display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; height: 100% !important; padding: 2vh 5vw !important;
 }
-
-/* Mengubah judul Sholat Jumat dari 3vh menjadi 2.2vh agar serasi */
 [data-tipe="TEKS_JUMAT"] div:first-child,
 .padded-slide-inner:has(table:not(.table-kas)) div:first-child {
-    font-size: 2.2vh !important; 
-    color: #f0d17b !important;
-    font-weight: 800 !important;
-    text-align: center !important;
-    white-space: nowrap !important; 
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100% !important;
-    margin-bottom: 0.5vh !important;
+    font-size: 2.2vh !important; color: #f0d17b !important; font-weight: 800 !important; text-align: center !important; white-space: nowrap !important; overflow: hidden; text-overflow: ellipsis; width: 100% !important; margin-bottom: 0.5vh !important;
 }
-
 [data-tipe="TEKS_JUMAT"] div:nth-child(2),
 .padded-slide-inner:has(table:not(.table-kas)) div:nth-child(2) {
-    font-size: 1.9vh !important; 
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    text-align: center !important;
-    white-space: nowrap !important; 
-    overflow: hidden;
-    text-overflow: ellipsis;
-    width: 100% !important;
-    margin-bottom: 3vh !important; 
+    font-size: 1.9vh !important; color: #ffffff !important; font-weight: 600 !important; text-align: center !important; white-space: nowrap !important; overflow: hidden; text-overflow: ellipsis; width: 100% !important; margin-bottom: 3vh !important; 
 }
-
 [data-tipe="TEKS_JUMAT"] table,
 .padded-slide-inner:has(table:not(.table-kas)) table {
-    font-size: 2.3vh !important;
-    width: auto !important; 
-    min-width: 85% !important;
-    max-width: 100% !important;
-    border-collapse: collapse !important;
-    margin: 0 auto !important; 
+    font-size: 2.3vh !important; width: auto !important; min-width: 85% !important; max-width: 100% !important; border-collapse: collapse !important; margin: 0 auto !important; 
 }
-
 [data-tipe="TEKS_JUMAT"] td:nth-child(1),
-.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(1) {
-    text-align: left !important;
-    font-weight: 700 !important;
-    color: #a2bcae !important;
-    padding: 0.8vh 1vw 0.8vh 0 !important;
-    white-space: nowrap !important;
-    width: 30% !important; 
-}
-
+.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(1) { text-align: left !important; font-weight: 700 !important; color: #a2bcae !important; padding: 0.8vh 1vw 0.8vh 0 !important; white-space: nowrap !important; width: 30% !important; }
 [data-tipe="TEKS_JUMAT"] td:nth-child(2),
-.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(2) {
-    text-align: center !important;
-    font-weight: 700 !important;
-    color: #d8b35a !important;
-    padding: 0.8vh 1.5vw !important;
-    width: 5% !important;
-}
-
+.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(2) { text-align: center !important; font-weight: 700 !important; color: #d8b35a !important; padding: 0.8vh 1.5vw !important; width: 5% !important; }
 [data-tipe="TEKS_JUMAT"] td:nth-child(3),
-.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(3) {
-    text-align: left !important;
-    font-weight: 700 !important;
-    color: #ffffff !important;
-    padding: 0.8vh 0 0.8vh 1vw !important;
-    word-wrap: break-word !important;
-}
+.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(3) { text-align: left !important; font-weight: 700 !important; color: #ffffff !important; padding: 0.8vh 0 0.8vh 1vw !important; word-wrap: break-word !important; }
 
 #sholat-standby-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000000; z-index: 9999; }
