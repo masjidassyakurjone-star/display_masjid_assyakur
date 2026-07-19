@@ -24,17 +24,17 @@ body {
     flex-direction: column;
     height: 100%;
     width: 100%;
-    gap: 1.2vw; /* Sedikit dirapatkan agar layout naik */
+    gap: 1.2vw; /* Jarak dirapatkan agar seluruh komponen naik */
 }
 
-/* 1. HEADER (Dinaikkan tingginya menjadi 11vh agar tidak menabrak widget bawah) */
+/* 1. HEADER (Dinaikkan tingginya menjadi 10.5vh & dipaksa alamat sebaris lurus) */
 .main-header-portrait {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    height: 11vh; /* Dikecilkan dari 14vh agar naik */
+    height: 10.5vh; /* Disesuaikan agar naik dan pas */
     flex-shrink: 0;
     padding: 0.5vh 2vw;
     background: rgba(7, 30, 20, 0.65);
@@ -43,11 +43,11 @@ body {
 }
 
 .logo-img-portrait {
-    height: 7vh; /* Disesuaikan agar pas dengan tinggi header baru */
+    height: 6.5vh; 
     width: auto;
     object-fit: contain;
     flex-shrink: 0;
-    margin-bottom: 0.4vh;
+    margin-bottom: 0.2vh;
 }
 
 .title-container-portrait h1 {
@@ -60,12 +60,13 @@ body {
 }
 
 .title-container-portrait .address-inline {
-    font-size: 1.2vh; 
+    font-size: 1.1vh; /* Dikecilkan sedikit agar pas sebaris */
     color: #ffffff; 
     font-weight: 600;
     line-height: 1.2;
     margin-top: 0.2vh;
-    max-width: 95%;
+    width: 100%;
+    white-space: nowrap; /* Dipaksa 1 baris lurus saja, tidak boleh patah ke bawah */
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
 }
 
@@ -73,7 +74,7 @@ body {
 .time-widget-row {
     display: flex;
     gap: 2vw;
-    height: 13vh; /* Ditambah sedikit ruang ekstra agar tulisan bernapas */
+    height: 13vh; 
     width: 100%;
     flex-shrink: 0;
 }
@@ -275,12 +276,12 @@ body {
     line-height: 1.1;
 }
 
-/* 5. FOOTER RUNNING TEXT (Modifikasi 2 Baris Bertumpuk) */
+/* 5. FOOTER RUNNING TEXT (Modifikasi 2 Baris Vertikal) */
 .main-footer-portrait {
     background: rgba(0, 0, 0, 0.75);
     border: 0.2vh solid #d8b35a;
     border-radius: 0.8vh;
-    height: 7.5vh; /* Tinggi ditambah untuk memuat 2 baris vertikal */
+    height: 7.5vh; /* Ditambah ruang agar memuat 2 baris vertikal */
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -291,7 +292,7 @@ body {
 
 .running-text-wrapper {
     display: flex;
-    flex-direction: column; /* Mengubah alur menjadi ke bawah (2 baris) */
+    flex-direction: column; /* Baris atas dan baris bawah */
     align-items: flex-start;
     width: 100%;
     height: 100%;
@@ -304,7 +305,7 @@ body {
     font-weight: 800;
     text-transform: uppercase;
     white-space: nowrap;
-    border-bottom: 0.15vh solid rgba(216, 179, 90, 0.4); /* Garis pembatas horizontal */
+    border-bottom: 0.15vh solid rgba(216, 179, 90, 0.3);
     padding-bottom: 0.2vh;
     width: 100%;
     text-align: left;
@@ -317,7 +318,7 @@ body {
 }
 
 #running-text {
-    font-size: 2.3vh !important; /* Dibuat sedikit lebih besar dan leluasa */
+    font-size: 2.3vh !important; 
     color: #ffffff !important;
     font-weight: 600 !important;
     display: block !important;
@@ -355,7 +356,7 @@ body {
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 
-/* LAYOUT TABEL JUMAT - TULISAN SHOLAT JUMAT DIPERKECIL */
+/* LAYOUT TABEL JUMAT - TULISAN DIKECILKAN */
 [data-tipe="TEKS_JUMAT"] .padded-slide-inner, 
 .padded-slide-inner:has(table:not(.table-kas)) {
     display: flex !important;
@@ -366,10 +367,10 @@ body {
     padding: 2vh 5vw !important;
 }
 
-/* Mengubah judul Sholat Jumat dari 3vh menjadi 2.4vh agar tidak terlalu besar */
+/* Mengubah judul Sholat Jumat dari 3vh menjadi 2.2vh agar serasi */
 [data-tipe="TEKS_JUMAT"] div:first-child,
 .padded-slide-inner:has(table:not(.table-kas)) div:first-child {
-    font-size: 2.4vh !important; 
+    font-size: 2.2vh !important; 
     color: #f0d17b !important;
     font-weight: 800 !important;
     text-align: center !important;
@@ -382,7 +383,7 @@ body {
 
 [data-tipe="TEKS_JUMAT"] div:nth-child(2),
 .padded-slide-inner:has(table:not(.table-kas)) div:nth-child(2) {
-    font-size: 2.0vh !important; 
+    font-size: 1.9vh !important; 
     color: #ffffff !important;
     font-weight: 600 !important;
     text-align: center !important;
@@ -395,7 +396,7 @@ body {
 
 [data-tipe="TEKS_JUMAT"] table,
 .padded-slide-inner:has(table:not(.table-kas)) table {
-    font-size: 2.4vh !important;
+    font-size: 2.3vh !important;
     width: auto !important; 
     min-width: 85% !important;
     max-width: 100% !important;
