@@ -115,7 +115,7 @@ let menggunakanSlideA = true;
 
 setInterval(() => {
     const sekarang = new Date();
-    const jam = sekarang.getHours();     
+    const jam = ThermalJam = sekarang.getHours();     
     const menit = sekarang.getMinutes(); 
     const detik = sekarang.getSeconds(); 
     const sekarangDetik = (jam * 3600) + (menit * 60) + detik;
@@ -165,7 +165,6 @@ setInterval(() => {
 
     let sisaDetik = sholatBerikutnya.targetDetik - sekarangDetik;
 
-    // Menyesuaikan format text dengan foto lama
     if (elLabel) {
         elLabel.innerText = `WAKTU SHOLAT ${sholatBerikutnya.isBesok ? 'SUBUH (BESOK)' : sholatBerikutnya.nama}`;
     }
@@ -390,15 +389,16 @@ function bangunStrukturSlideAntrian() {
     let immJmt = (dataJumat[2] && dataJumat[2][1]) ? dataJumat[2][1] : '-';
     let bilJmt = (dataJumat[3] && dataJumat[3][1]) ? dataJumat[3][1] : '-';
     
+    // KOREKSI UTAMA: Pengaturan perataan tengah dipasang langsung (Inline Style) pada struktur data mading Jumat
     dataSlides.push({
         tipe: 'TEKS_JUMAT',
         durasi: 15000,
         html: `
-            <div class="padded-slide-inner">
-                <div>SHOLAT JUMAT</div>
-                <div>${tglJmt}</div>
-                <div class="scrollable-content" style="overflow:hidden; display:flex; justify-content:center; width:100%;">
-                    <table>
+            <div class="padded-slide-inner-jumat" style="width:100%; height:100%; padding:3vh 4vw; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+                <div class="judul-jumat-besar">SHOLAT JUMAT</div>
+                <div class="tanggal-jumat-besar">${tglJmt}</div>
+                <div style="display:flex; justify-content:center; align-items:center; width:100%; margin-top:2vh;">
+                    <table class="tabel-jumat-tv">
                         <tr><td>Khatib Jumat</td><td>:</td><td>${khtJmt}</td></tr>
                         <tr><td>Imam Sholat</td><td>:</td><td>${immJmt}</td></tr>
                         <tr><td>Bilal / Muadzin</td><td>:</td><td>${bilJmt}</td></tr>
