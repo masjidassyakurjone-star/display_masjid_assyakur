@@ -1,8 +1,12 @@
 /* ==========================================================================
+   COMBINED.JS - ENGINE SIGNAGE MASJID ASSYAKUR V2.8 (FIXED NAVIGASI SINKRON)
+   ========================================================================== */
+
+/* ==========================================================================
    BAGIAN 1: SISTEM DATABASE JADWAL SHOLAT INTERNAL & ALARM (AUDIO MP3)
    ========================================================================== */
 function ambilJadwalHariIni(dateObj) {
-    const tahun = dateObj.getFullYear();
+    const tahun = "2026";
     const bulan = String(dateObj.getMonth() + 1).padStart(2, '0');
     const tanggal = String(dateObj.getDate()).padStart(2, '0');
     const keyTanggal = `${tahun}-${bulan}-${tanggal}`; 
@@ -13,39 +17,29 @@ function ambilJadwalHariIni(dateObj) {
     return { imsak: "04:44", fajr: "04:54", dhuhr: "12:18", asr: "15:43", magrib: "18:21", isya: "19:35" };
 }
 
-// Variabel penanda (flag) agar audio hanya berbunyi tepat satu kali
 let isAlarmAdzanPlay = false;
 let isAlarmIqamahPlay = false;
 
-// Fungsi pemicu interaksi untuk memancing izin audio browser
 function pancingIzinAudioBrowser() {
     console.log("Izin audio berhasil dipancing melalui interaksi pengguna.");
-    const dummyAudio = new Audio('audio/BEEP PENDEK.mp3');
+    const dummyAudio = new Audio('BEEP PENDEK.mp3');
     dummyAudio.volume = 0; 
     dummyAudio.play().catch(() => {});
 }
 
-// Fungsi untuk memutar file MP3 secara berurutan atau tunggal
 function putarAudioMp3(fileUtama, fileSambungan = null) {
-    const audio = new Audio(`audio/${fileUtama}`);
+    const audio = new Audio(`${fileUtama}`);
     audio.play().then(() => {
         console.log(`Berhasil memutar audio: ${fileUtama}`);
         if (fileSambungan) {
             audio.onended = () => {
-                const audioSambungan = new Audio(`audio/${fileSambungan}`);
-                audioSambungan.play().then(() => {
-                    console.log(`Berhasil memutar sambungan: ${fileSambungan}`);
-                }).catch(e => {
-                    console.error(`Gagal memutar audio sambungan (${fileSambungan}):`, e);
-                });
+                const audioSambungan = new Audio(`${fileSambungan}`);
+                audioSambungan.play().catch(e => console.error(e));
             };
         }
-    }).catch(e => {
-        console.error(`Gagal memutar audio utama (${fileUtama}):`, e);
-    });
+    }).catch(e => console.error(e));
 }
 
-// Mengubah triggerAlarm agar menerima tipe event ('adzan' atau 'iqamah')
 function triggerAlarm(tipe) {
     if (tipe === 'adzan') {
         console.log("Memicu jalannya alarm 7 detik sebelum Adzan...");
@@ -76,8 +70,7 @@ function hitungHijriyahOtomatis(dateObj) {
         }
     }
 
-    // Setelan indeks penanggalan hilal (Silakan ubah angka 2440588 ini jika ingin bergeser +/- hari)
-    let jd = Math.floor(kustomSore.getTime() / 86400000) + 2440588;
+    let jd = Math.floor(kustomSore.getTime() / 86400000) + 2440589;
     let l = jd - 1948440 + 10632;
     let n = Math.floor((l - 1) / 10631);
     l = l - 10631 * n + 354;
@@ -94,7 +87,9 @@ function hitungHijriyahOtomatis(dateObj) {
         "Ramadhan", "Syawwal", "Dzulqa'dah", "Dzulhijjah"
     ];
 
-    return `${d} ${namaBulanHijriyah[m - 1]} ${y} H`;
+    let indeksBulan = Math.max(0, Math.min(11, m - 1));
+
+    return `${d} ${namaBulanHijriyah[indeksBulan]} ${y} H`;
 }
 
 /* ==========================================================================
@@ -110,30 +105,27 @@ let scrollInterval;
 
 let dataMasjidJeda = { SUBUH: 12, DZUHUR: 10, ASHAR: 10, MAGHRIB: 7, ISYA: 10 }; 
 let isModeSholatBerlangsung = false;
+let isModeMenungguIqamah = false;
 
-// Indeks Global Tracker untuk perputaran dinamis silih-berganti
-const MAKSIMAL_GAMBAR_LOKAL = 10; 
-let globalImageIndex = 0;  // Melacak urutan gambar ascending (0 sampai 9)
-let globalTextIndex = 0;   // Melacak urutan baris teks info ascending
+let DAFTAR_GAMBAR_LOKAL = [];
+
+let globalImageIndex = 0;      
+let globalTextIndex = 0;       
+let menggunakanSlideA = true;
 
 setInterval(() => {
-    if (isModeSholatBerlangsung) {
-        updateHanyaJamUtama();
-        return;
-    }
-
     const sekarang = new Date();
+    const jam = sekarang.getHours();     
+    const menit = sekarang.getMinutes(); 
+    const detik = brassSekarang = sekarang.getSeconds(); 
+    const sekarangDetik = (jam * 3600) + (menit * 60) + detik;
     
-    let jam = String(sekarang.getHours()).padStart(2, '0');
-    let menit = String(sekarang.getMinutes()).padStart(2, '0');
-    let detik = String(sekarang.getSeconds()).padStart(2, '0');
     if (document.getElementById('clock-time')) {
-        document.getElementById('clock-time').innerText = `${jam}:${menit}:${detik}`;
+        document.getElementById('clock-time').innerText = `${String(jam).padStart(2, '0')}:${String(menit).padStart(2, '0')}:${String(detik).padStart(2, '0')}`;
     }
 
-    const opsiHari = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
     if (document.getElementById('clock-date')) {
-        document.getElementById('clock-date').innerText = sekarang.toLocaleDateString('id-ID', opsiHari);
+        document.getElementById('clock-date').innerText = sekarang.toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
     }
 
     if (document.getElementById('clock-hijri')) {
@@ -153,136 +145,157 @@ setInterval(() => {
         { nama: 'ISYA', waktu: jadwalHariIni.isya }
     ];
 
-    let sholatActive = null;
-    let waktuSekarangDetik = (sekarang.getHours() * 3600) + (sekarang.getMinutes() * 60) + sekarang.getSeconds();
-
+    let sholatBerikutnya = null;
     for (let i = 0; i < daftarSholat.length; i++) {
         let tParts = daftarSholat[i].waktu.split(':');
         let targetDetik = (parseInt(tParts[0]) * 3600) + (parseInt(tParts[1]) * 60);
-        let mIqamahConfig = dataMasjidJeda[daftarSholat[i].nama] || 10; 
-        let batasIqamahDetik = mIqamahConfig * 60;
+        if (targetDetik > sekarangDetik) {
+            sholatBerikutnya = { nama: daftarSholat[i].nama, waktuStr: daftarSholat[i].waktu, targetDetik: targetDetik, isBesok: false };
+            break;
+        }
+    }
+    if (!sholatBerikutnya) {
+        let tParts = jadwalBesok.fajr.split(':');
+        sholatBerikutnya = { nama: 'SUBUH', waktuStr: jadwalBesok.fajr, targetDetik: (parseInt(tParts[0]) * 3600) + (parseInt(tParts[1]) * 60) + 86400, isBesok: true };
+    }
 
-        if (targetDetik + batasIqamahDetik > waktuSekarangDetik) {
-            sholatActive = { 
-                nama: daftarSholat[i].nama, 
-                waktuStr: daftarSholat[i].waktu, 
-                targetDetik: targetDetik, 
-                batasIqamahDetik: batasIqamahDetik,
-                isBesok: false 
+    const elLabel = document.getElementById('countdown-title');
+    const elSholatName = document.getElementById('countdown-sholat');
+    const elWaktu = document.getElementById('countdown-time');
+
+    let sisaDetikMenujuAdzan = sholatBerikutnya.targetDetik - agoraDetik = sekarangDetik;
+    let sisaDetik = sholatBerikutnya.targetDetik - sekarangDetik;
+
+    // KOREKSI UTAMA: Sinkronisasi pembaruan 3 baris widget kanan tanpa merusak DOM
+    if (elLabel) {
+        elLabel.innerText = "MENUJU SHOLAT";
+    }
+    if (elSholatName) {
+        elSholatName.innerText = sholatBerikutnya.isBesok ? 'SUBUH (BESOK)' : sholatBerikutnya.nama;
+    }
+    if (elWaktu) {
+        let jamSisa = String(Math.floor(sisaDetik / 3600)).padStart(2, '0');
+        let menitSisa = String(Math.floor((sisaDetik % 3600) / 60)).padStart(2, '0');
+        let detikSisa = String(sisaDetik % 60).padStart(2, '0');
+        elWaktu.innerText = `${jamSisa}:${menitSisa}:${detikSisa}`;
+    }
+
+    if (sisaDetikMenujuAdzan === 7 && !sholatBerikutnya.isBesok && !isAlarmAdzanPlay) {
+        isAlarmAdzanPlay = true;
+        triggerAlarm('adzan');
+        setTimeout(() => { isAlarmAdzanPlay = false; }, 10000);
+    }
+
+    if (isModeSholatBerlangsung) return; 
+
+    let iqamahAktif = null;
+    for (let i = 0; i < daftarSholat.length; i++) {
+        let tParts = daftarSholat[i].waktu.split(':');
+        let adzanDetik = (parseInt(tParts[0]) * 3600) + (parseInt(tParts[1]) * 60);
+        let jedaMenit = dataMasjidJeda[daftarSholat[i].nama] || 10;
+        let batasIqamahDetik = jedaMenit * 60;
+
+        if (sekarangDetik >= adzanDetik && sekarangDetik < adzanDetik + batasIqamahDetik) {
+            iqamahAktif = {
+                nama: daftarSholat[i].nama,
+                sisaDetik: (adzanDetik + batasIqamahDetik) - sekarangDetik
             };
             break;
         }
     }
 
-    if (!sholatActive) {
-        let tParts = jadwalBesok.fajr.split(':');
-        sholatActive = { 
-            nama: 'SUBUH', 
-            waktuStr: jadwalBesok.fajr, 
-            targetDetik: (parseInt(tParts[0]) * 3600) + (parseInt(tParts[1]) * 60) + 86400, 
-            batasIqamahDetik: 15 * 60,
-            isBesok: true 
-        };
-    }
+    if (iqamahAktif) {
+        isModeMenungguIqamah = true;
+        let mIqamah = String(Math.floor(iqamahAktif.sisaDetik / 60)).padStart(2, '0');
+        let sIqamah = String(iqamahAktif.sisaDetik % 60).padStart(2, '0');
 
-    let sisaDetik = sholatActive.targetDetik - waktuSekarangDetik;
+        tampilkanInterupsiIqamahPapan(iqamahAktif.nama, `${mIqamah}:${sIqamah}`);
 
-    const elLabel = document.getElementById('countdown-title');
-    const elWaktu = document.getElementById('countdown-time');
-    const elCountdown = document.getElementById('countdown-timer');
-
-    if (elWaktu) elWaktu.innerText = sholatActive.waktuStr;
-
-    if (sisaDetik <= 0 && !sholatActive.isBesok) {
-        isAlarmAdzanPlay = false;
-
-        if (elWaktu) elWaktu.style.setProperty('display', 'none', 'important');
-        if (elLabel) {
-            elLabel.innerHTML = 'MENUNGGU IQAMAH';
-            elLabel.style.color = '#ff5252';
-        }
-        
-        let sisaIqamah = sholatActive.batasIqamahDetik + sisaDetik;
-        let mIqamah = String(Math.floor(sisaIqamah / 60)).padStart(2, '0');
-        let sIqamah = String(sisaIqamah % 60).padStart(2, '0');
-        
-        if (elCountdown) {
-            elCountdown.innerText = `${mIqamah}:${sIqamah}`;
-            elCountdown.style.borderColor = '#ff5252';
-            elCountdown.style.background = 'rgba(255, 0, 0, 0.2)';
-        }
-
-        if (sisaIqamah <= 7 && sisaIqamah > 0 && !isAlarmIqamahPlay) {
+        if (iqamahAktif.sisaDetik === 7 && !isAlarmIqamahPlay) {
             isAlarmIqamahPlay = true;
             triggerAlarm('iqamah');
+            setTimeout(() => { isAlarmIqamahPlay = false; }, 10000);
         }
 
-        if (sisaIqamah <= 0) {
-            isAlarmIqamahPlay = false;
-            aktifkanModeStandbySholat(sholatActive.nama);
+        if (iqamahAktif.sisaDetik <= 1) {
+            setTimeout(() => {
+                aktifkanModeStandbySholat();
+            }, 1000);
         }
     } else {
-        if (elWaktu) elWaktu.style.setProperty('display', 'inline-block'); 
-        if (elLabel) {
-            elLabel.innerHTML = `WAKTU SHOLAT <span style="color:#e5c158;">${sholatActive.isBesok ? 'SUBUH (BESOK)' : sholatActive.nama}</span>`;
-            elLabel.style.color = '#e5c158';
-        }
-
-        let jamSisa = String(Math.floor(sisaDetik / 3600)).padStart(2, '0');
-        let menitSisa = String(Math.floor((sisaDetik % 3600) / 60)).padStart(2, '0');
-        let detikSisa = String(sisaDetik % 60).padStart(2, '0');
-
-        if (elCountdown) {
-            elCountdown.innerText = `-${jamSisa}:${menitSisa}:${detikSisa}`;
-            elCountdown.style.borderColor = '#ff5252';
-            elCountdown.style.background = 'rgba(255, 0, 0, 0.15)';
-        }
-
-        if (sisaDetik <= 7 && sisaDetik > 0 && !sholatActive.isBesok && !isAlarmAdzanPlay) {
-            isAlarmAdzanPlay = true;
-            triggerAlarm('adzan');
+        if (isModeMenungguIqamah) {
+            isModeMenungguIqamah = false;
+            bangunStrukturSlideAntrian();
         }
     }
 }, 1000);
 
-function updateHanyaJamUtama() {
-    const ClinicalNow = new Date();
-    let jam = String(ClinicalNow.getHours()).padStart(2, '0');
-    let menit = String(ClinicalNow.getMinutes()).padStart(2, '0');
-    let detik = String(ClinicalNow.getSeconds()).padStart(2, '0');
-    if (document.getElementById('clock-time')) {
-        document.getElementById('clock-time').innerText = `${jam}:${menit}:${detik}`;
+function tampilkanInterupsiIqamahPapan(namaSholat, stringWaktu) {
+    if (slideTimeout) clearTimeout(slideTimeout);
+    if (scrollInterval) clearInterval(scrollInterval);
+
+    const slideA = document.getElementById('slide-A');
+    const slideB = document.getElementById('slide-B');
+    if (!slideA || !slideB) return;
+
+    const htmlIqamahMenyolok = `
+        <div class="padded-slide-inner" style="justify-content: center; align-items: center; background: #03150d; height: 100%; padding: 2vh 2vw;">
+            <div style="font-size: 4vh; color: #e5c158; font-weight: 700; letter-spacing: 0.2vh; text-transform: uppercase; margin-bottom: 0.5vh;">MENUNGGU IQAMAH SHOLAT</div>
+            <div style="font-size: 7.5vh; color: #ffffff; font-weight: 800; margin-bottom: 2vh; text-transform: uppercase; letter-spacing: 0.1vh; line-height: 1;">${namaSholat}</div>
+            
+            <div style="font-size: 14vh; font-weight: 900; color: #ff5252; background: rgba(255, 0, 0, 0.15); border: 0.5vh solid #ff5252; padding: 0.2vh 7vw; border-radius: 2vh; line-height: 1.15; font-variant-numeric: tabular-nums; margin-bottom: 2.5vh; box-shadow: 0 0 3vh rgba(255, 82, 82, 0.3);">
+                ${stringWaktu}
+            </div>
+            
+            <div style="width: 100%; background: rgba(0,0,0,0.4); padding: 2vh 2vw; border-radius: 1.5vh; border: 0.2vh solid rgba(229,193,88,0.3); text-align: center;">
+                <div style="font-family: 'Amiri', serif; font-size: 4vh; color: #e5c158; direction: rtl; line-height: 1.5; margin-bottom: 1.5vh; font-weight: 700; letter-spacing: 0;">
+                    حَدَّثَنَا مُحَمَّدُ بْنُ كَثِيرٍ... عَنْ أَنَسِ بْنِ مَالِكٍ, قَالَ قَالَ رَسُولُ اللَّهِ ﷺ ‏"‏ لاَ يُرَدُّ الدُّعَاءُ بَيْنَ الأَذَانِ وَالإِقَAMAH ‏"‏ ‏.‏
+                </div>
+                <div style="font-family: 'Montserrat', sans-serif; font-size: 2.4vh; color: #ffffff; font-weight: 600; line-height: 1.4; font-style: italic; letter-spacing: 0.02vh;">
+                    Diriwayatkan Anas bin Malik: "Doa yang dipanjatkan antara adzan dan iqamah tidak akan ditolak."
+                </div>
+            </div>
+        </div>
+    `;
+
+    if (slideA.classList.contains('active')) {
+        slideA.innerHTML = htmlIqamahMenyolok;
+    } else if (slideB.classList.contains('active')) {
+        slideB.innerHTML = htmlIqamahMenyolok;
+    } else {
+        slideA.innerHTML = htmlIqamahMenyolok;
+        slideA.classList.add('active');
     }
 }
 
-function aktifkanModeStandbySholat(namaSholat) {
+function aktifkanModeStandbySholat() {
+    if (isModeSholatBerlangsung) return;
+
     isModeSholatBerlangsung = true;
-    let overlay = document.getElementById('sholat-standby-overlay');
-    if (!overlay) {
-        overlay = document.createElement('div');
-        overlay.id = 'sholat-standby-overlay';
-        document.body.appendChild(overlay);
-    }
-    overlay.innerHTML = `
-        <div class="standby-container">
-            <div class="standby-text-utama">SHOLAT BERJAMAAH ${namaSholat} SEGERA DIMULAI</div>
-            <div class="standby-text-sub">"Luruskan dan rapatkan shaf, sesungguhnya rapinya shaf termasuk kesempurnaan sholat."</div>
-            <div class="standby-text-sub-2">Mohon nonaktifkan atau senyapkan suara handphone/gadget Anda.</div>
-        </div>
-    `;
-    overlay.classList.add('active');
-    clearTimeout(slideTimeout);
-    clearInterval(scrollInterval);
+    isModeMenungguIqamah = false;
+
+    const slideA = document.getElementById('slide-A');
+    const slideB = document.getElementById('slide-B');
+    if (!slideA || !slideB) return;
+
+    if (slideTimeout) clearTimeout(slideTimeout);
+    if (scrollInterval) clearInterval(scrollInterval);
+
+    const htmlStandbyGambar = `<img src="waktu_sholat.jpg" class="slide-stretched-img" style="width:100%; height:100%; object-fit:contain; display:block;" onerror="this.onerror=null; this.src='logo.png';">`;
+    
+    slideA.innerHTML = htmlStandbyGambar;
+    slideB.innerHTML = ""; 
+    slideB.classList.remove('active');
+    slideA.classList.add('active');
 
     setTimeout(() => {
-        overlay.classList.remove('active');
         isModeSholatBerlangsung = false;
-        inisialisasiPerputaranPapan();
-    }, 900000); 
+        bangunStrukturSlideAntrian(); 
+    }, 600000); 
 }
 
 /* ==========================================================================
-   BAGIAN 3: PIPELINE MATRIX DUA KONTEN DINAMIS (SILIH-BERGANTI PAS)
+   BAGIAN 3: PIPELINE MATRIX DATA INTERFACE GOOGLE SHEETS
    ========================================================================== */
 window.addEventListener('DOMContentLoaded', () => {
     tampilkanDataDariCacheLokal();
@@ -303,7 +316,7 @@ async function muatDataGoogleSheets() {
         if (hasil.valueRanges) {
             localStorage.setItem('cache_display_masjid', JSON.stringify(hasil.valueRanges));
             cacheDataSheetGlobal = hasil.valueRanges;
-            if (!isModeSholatBerlangsung && dataSlides.length === 0) {
+            if (!isModeSholatBerlangsung && !isModeMenungguIqamah && dataSlides.length === 0) {
                 bangunStrukturSlideAntrian();
             }
         }
@@ -317,7 +330,7 @@ function tampilkanDataDariCacheLokal() {
     const cacheData = localStorage.getItem('cache_display_masjid');
     if (cacheData) {
         cacheDataSheetGlobal = JSON.parse(cacheData);
-        if (!isModeSholatBerlangsung && dataSlides.length === 0) {
+        if (!isModeSholatBerlangsung && !isModeMenungguIqamah && dataSlides.length === 0) {
             bangunStrukturSlideAntrian();
         }
     } else {
@@ -331,9 +344,8 @@ function tampilkanDataDariCacheLokal() {
     }
 }
 
-// Logika pembentukan antrian dinamis: 1 Loop = Sholat Jumat + Saldo + Tabel + 2 Gambar + 2 Teks
 function bangunStrukturSlideAntrian() {
-    if (!cacheDataSheetGlobal) return;
+    if (isModeSholatBerlangsung || isModeMenungguIqamah || !cacheDataSheetGlobal) return;
 
     const dataJumat = cacheDataSheetGlobal[0].values || [];
     const dataKeuangan = cacheDataSheetGlobal[1].values || [];
@@ -351,22 +363,29 @@ function bangunStrukturSlideAntrian() {
     let totalPemasukan = 0, totalPengeluaran = 0, saldoAkhir = "Rp 0";
     for (let i = 1; i < dataKeuangan.length; i++) {
         const baris = dataKeuangan[i]; if (!baris) continue;
-        
         const keterangan = baris[1] ? baris[1].toUpperCase().trim() : "";
-        if (keterangan.includes("SALDO AWAL")) {
-            saldoAwal = formatMataUangAman(baris[4], false); 
-        }
-
+        if (keterangan.includes("SALDO AWAL")) { saldoAwal = formatMataUangAman(baris[4], false); }
         totalPemasukan += baris[2] ? bersihkanAngka(baris[2]) : 0;
         totalPengeluaran += baris[3] ? bersihkanAngka(baris[3]) : 0;
-        if (baris[4] && baris[4].trim() !== "" && baris[4].trim() !== "0") {
-            saldoAkhir = formatMataUangAman(baris[4], false);
+        if (baris[4] && baris[4].trim() !== "" && baris[4].trim() !== "0") { saldoAkhir = formatMataUangAman(baris[4], false); }
+    }
+
+    DAFTAR_GAMBAR_LOKAL = [];
+    for (let i = 0; i < dataInfoLain.length; i++) {
+        const isiTeks = dataInfoLain[i][0] ? dataInfoLain[i][0].trim() : "";
+        if (isiTeks.match(/\.(jpg|jpeg|png)$/i)) {
+            DAFTAR_GAMBAR_LOKAL.push(isiTeks);
         }
     }
+    DAFTAR_GAMBAR_LOKAL.sort((a, b) => a.localeCompare(b, undefined, { numeric: true, sensitivity: 'base' }));
+
+    const canvasTextMurni = dataInfoLain.map(row => row[0]).filter(teks => teks && !teks.trim().match(/\.(jpg|jpeg|png)$/i));
 
     dataSlides = [];
 
-    // 1. SHOLAT JUMAT (10 DETIK BERSIH)
+    tambahkanItemGambarDinamis();
+    tambahkanItemTeksDinamis(canvasTextMurni);
+
     let tglJmt = (dataJumat[0] && dataJumat[0][1]) ? dataJumat[0][1] : '-';
     let khtJmt = (dataJumat[1] && dataJumat[1][1]) ? dataJumat[1][1] : '-';
     let immJmt = (dataJumat[2] && dataJumat[2][1]) ? dataJumat[2][1] : '-';
@@ -374,54 +393,49 @@ function bangunStrukturSlideAntrian() {
     
     dataSlides.push({
         tipe: 'TEKS_JUMAT',
-        durasi: 10000, 
+        durasi: 15000,
         html: `
-            <div class="padded-slide-inner" style="font-family:'Times New Roman', Times, serif !important; color:#ffffff !important; padding-top:4vh;">
-                <div style="font-size:5.5vh; color:#ffffff !important; text-align:center; font-weight:bold; margin-bottom:0.5vh; line-height:1.0;">PENGUMUMAN SHOLAT JUMAT</div>
-                <div style="font-size:4vh; color:#ffffff !important; text-align:center; font-weight:bold; margin-bottom:5vh; line-height:1.0;">${tglJmt}</div>
+            <div class="padded-slide-inner">
+                <div>SHOLAT JUMAT</div>
+                <div>${tglJmt}</div>
                 <div class="scrollable-content" style="overflow:hidden; display:flex; justify-content:center; width:100%;">
-                    <table style="font-family:'Times New Roman', Times, serif !important; font-size:4.5vh; color:#ffffff !important; border-collapse:collapse; width:90%; margin:0 auto; line-height:1.1;">
-                        <tr><td style="width:35%; padding:0.8vh 0; font-weight:bold; text-align:left;">Khatib Jumat</td><td style="width:5%; text-align:center;">:</td><td style="width:60%;">${khtJmt}</td></tr>
-                        <tr><td style="padding:0.8vh 0; font-weight:bold; text-align:left;">Imam Sholat</td><td style="text-align:center;">:</td><td>${immJmt}</td></tr>
-                        <tr><td style="padding:0.8vh 0; font-weight:bold; text-align:left;">Bilal / Muadzin</td><td style="text-align:center;">:</td><td>${bilJmt}</td></tr>
+                    <table>
+                        <tr><td>Khatib Jumat</td><td>:</td><td>${khtJmt}</td></tr>
+                        <tr><td>Imam Sholat</td><td>:</td><td>${immJmt}</td></tr>
+                        <tr><td>Bilal / Muadzin</td><td>:</td><td>${bilJmt}</td></tr>
                     </table>
                 </div>
             </div>
         `
     });
 
-    // 2. SALDO MASJID (10 DETIK BERSIH)
-    let pmsknStr = "Rp " + totalPemasukan.toLocaleString('id-ID');
-    let pglrnStr = "Rp " + totalPengeluaran.toLocaleString('id-ID');
-
     dataSlides.push({
         tipe: 'SALDO_JUMAT',
-        durasi: 10000, 
+        durasi: 15000,
         html: `
             <div class="padded-slide-inner" style="justify-content: space-between; padding: 2vh 2vw; height: 100%;">
-                <div style="background: rgba(0,0,0,0.25); border: 0.18vh solid rgba(229,193,88,0.3); border-radius: 1vh; width: 100%; padding: 1.5vh; text-align: center;">
+                <div style="background: rgba(0,0,0,0.25); border: 0.18vh solid rgba(229,193,88,0.3); border-radius: 1vh; width: 100%; padding: 1.2vh; text-align: center;">
                     <span style="font-size: 2vh; color: #a2bcae; display: block; font-weight: 600;">Saldo Jumat Lalu</span>
-                    <strong style="font-size: 3.5vh; color: #ffffff; font-weight: 700; margin-top: 0.5vh; display: block;">${saldoAwal}</strong>
+                    <strong style="font-size: 3.5vh; color: #ffffff; font-weight: 700; margin-top: 0.5vh; display: block; white-space: nowrap;">${saldoAwal}</strong>
                 </div>
                 <div style="display: flex; gap: 1.5vw; width: 100%;">
-                    <div style="flex: 1; background: rgba(46, 204, 113, 0.1); border: 0.18vh solid rgba(46, 204, 113, 0.4); border-radius: 1vh; padding: 1.5vh; text-align: center;">
-                        <span style="font-size: 2vh; color: #2ecc71; display: block; font-weight: 600;">Penerimaan</span>
-                        <strong style="font-size: 3.5vh; color: #ffffff; font-weight: 700; margin-top: 0.5vh; display: block;">${pmsknStr}</strong>
+                    <div style="flex: 1; background: rgba(46, 204, 113, 0.1); border: 0.18vh solid rgba(46, 204, 113, 0.4); border-radius: 1vh; padding: 1.2vh; text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                        <span style="font-size: 1.9vh; color: #2ecc71; display: block; font-weight: 600; margin-bottom: 0.5vh;">Penerimaan</span>
+                        <strong style="font-size: 2.5vh; color: #ffffff; font-weight: 700; display: block; white-space: nowrap;">${"Rp " + totalPemasukan.toLocaleString('id-ID')}</strong>
                     </div>
-                    <div style="flex: 1; background: rgba(231, 76, 60, 0.1); border: 0.18vh solid rgba(231, 76, 60, 0.4); border-radius: 1vh; padding: 1.5vh; text-align: center;">
-                        <span style="font-size: 2vh; color: #e74c3c; display: block; font-weight: 600;">Pengeluaran</span>
-                        <strong style="font-size: 3.5vh; color: #ffffff; font-weight: 700; margin-top: 0.5vh; display: block;">${pglrnStr}</strong>
+                    <div style="flex: 1; background: rgba(231, 76, 60, 0.1); border: 0.18vh solid rgba(231, 76, 60, 0.4); border-radius: 1vh; padding: 1.2vh; text-align: center; display: flex; flex-direction: column; justify-content: center;">
+                        <span style="font-size: 1.9vh; color: #e74c3c; display: block; font-weight: 600; margin-bottom: 0.5vh;">Pengeluaran</span>
+                        <strong style="font-size: 2.5vh; color: #ffffff; font-weight: 700; display: block; white-space: nowrap;">${"Rp " + totalPengeluaran.toLocaleString('id-ID')}</strong>
                     </div>
                 </div>
-                <div style="background: linear-gradient(180deg, rgba(11,48,28,0.95) 0%, rgba(5,25,14,0.98) 100%); border: 0.25vh solid #e5c158; border-radius: 1.2vh; width: 100%; padding: 2.2vh; text-align: center;">
+                <div style="background: linear-gradient(180deg, rgba(11,48,28,0.95) 0%, rgba(5,25,14,0.98) 100%); border: 0.25vh solid #e5c158; border-radius: 1.2vh; width: 100%; padding: 1.8vh; text-align: center;">
                     <span style="font-size: 2.2vh; color: #e5c158; display: block; font-weight: 600;">SALDO SEKARANG</span>
-                    <strong style="font-size: 5.5vh; color: #ffffff; font-weight: 800; margin-top: 0.5vh; display: block;">${saldoAkhir}</strong>
+                    <strong style="font-size: 4.5vh; color: #ffffff; font-weight: 800; margin-top: 0.5vh; display: block; white-space: nowrap;">${saldoAkhir}</strong>
                 </div>
             </div>
         `
     });
 
-    // 3. TABEL DETAIL KAS KEUANGAN (20 DETIK BERSIH)
     let tableRowsHtml = "";
     for (let i = 1; i < dataKeuangan.length; i++) {
         const baris = dataKeuangan[i]; if (!baris || baris.length === 0) continue;
@@ -438,78 +452,60 @@ function bangunStrukturSlideAntrian() {
     if (tableRowsHtml !== "") {
         dataSlides.push({
             tipe: 'TABEL_KAS',
-            durasi: 20000, 
+            durasi: 25000,
             html: `
                 <div class="padded-slide-inner">
-                    <div style="font-size:3vh; color:#e5c158; border-bottom:0.18vh dashed rgba(229,193,88,0.4); padding-bottom:1vh; margin-bottom:2vh; font-weight:700; text-align:center;">LAPORAN KAS KEUANGAN MASJID</div>
+                    <div style="font-size:3vh; color:#e5c158; border-bottom:0.18vh dashed rgba(229,193,88,0.4); padding-bottom:1vh; margin-bottom:2vh; font-weight:700; text-align:center; line-height: 1.2;">
+                        <div style="display: block;">LAPORAN KAS</div>
+                        <div style="display: block;">KEUANGAN MASJID</div>
+                    </div>
                     <div class="scrollable-content table-responsive">
                         <table class="table-kas">
                             <thead><tr><th>TANGGAL</th><th>KETERANGAN REKENING</th><th>MASUK</th><th>KELUAR</th><th>SALDO</th></tr></thead>
                             <tbody>${tableRowsHtml}</tbody>
-                        </table>
-                    </div>
-                </div>
-            `
-        });
-    }
-
-    // Ekstraksi total baris teks info Google Sheet
-    let totalTeksValid = [];
-    for (let i = 0; i < dataInfoLain.length; i++) {
-        const isiTeks = dataInfoLain[i][0];
-        if (isiTeks && isiTeks.trim() !== "") {
-            totalTeksValid.push(isiTeks);
-        }
-    }
-
-    // PENGUNCIAN METRIKS: MENYISIPKAN HANYA 2 GAMBAR DAN 2 TEKS PADA SIKLUS INI
-    // Menyisipkan Gambar ke-1 & Teks ke-1
-    tambahkanItemGambarDinamis();
-    tambahkanItemTeksDinamis(totalTeksValid);
-
-    // Menyisipkan Gambar ke-2 & Teks ke-2
-    tambahkanItemGambarDinamis();
-    tambahkanItemTeksDinamis(totalTeksValid);
+                </table>
+            </div>
+        </div>
+    `
+   });    }
 
     inisialisasiPerputaranPapan();
 }
 
-// Fungsi pembantu penanganan giliran Gambar Ascending
 function tambahkanItemGambarDinamis() {
-    const noGambarTampil = globalImageIndex + 1;
+    if (DAFTAR_GAMBAR_LOKAL.length === 0) return;
+    const namaFileGambar = DAFTAR_GAMBAR_LOKAL[globalImageIndex % DAFTAR_GAMBAR_LOKAL.length];
+    
+    const urlGambarGithubTV = `https://raw.githubusercontent.com/verypriasetia/masjid-assyakur/main/image/${namaFileGambar}`;
+    
     dataSlides.push({
         tipe: 'IMAGE_STRETCH',
-        durasi: 10000, // 10 Detik Bersih
-        html: `<img src="image/${noGambarTampil}.jpg" class="slide-stretched-img" onerror="this.src='image/1.jpg';">`
+        durasi: 15000,
+        html: `<img src="${urlGambarGithubTV}" class="slide-stretched-img" onerror="this.onerror=null; this.src='logo.png';">`
     });
-    // Geser urutan gambar berikutnya untuk putaran selanjutnya (jika lewat dari batas maksimum, reset ke 1)
-    globalImageIndex = (globalImageIndex + 1) % MAKSIMAL_GAMBAR_LOKAL;
+    globalImageIndex++;
 }
 
-// Fungsi pembantu penanganan giliran baris teks Google Sheet Ascending
-function tambahkanItemTeksDinamis(arrayTeks) {
-    if (arrayTeks.length === 0) {
-        // Jika data di spreadsheet kosong, pasang teks fallback standby
+function tambahkanItemTeksDinamis(teksMurni) {
+    if (teksMurni.length === 0) {
         dataSlides.push({
             tipe: 'TEKS_PENGUMUMAN',
-            durasi: 10000,
-            html: `<div class="padded-slide-inner" style="justify-content:center; align-items:center;"><div class="scrollable-content info-text-content" style="padding-top:2vh;">Masjid Assyakur Desa Jone Paser</div></div>`
+            durasi: 15000,
+            html: `<div class="padded-slide-inner" style="justify-content:center; align-items:center;"><div class="scrollable-content info-text-content" style="padding-top:2vh; text-align: left; white-space: pre-wrap;">Masjid Assyakur Desa Jone Paser</div></div>`
         });
         return;
     }
-    
-    const teksTampil = arrayTeks[globalTextIndex];
+    const teksTampil = teksMurni[globalTextIndex % teksMurni.length];
     dataSlides.push({
         tipe: 'TEKS_PENGUMUMAN',
-        durasi: 10000, // 10 Detik Bersih
+        durasi: 15000,
         html: `
-            <div class="padded-slide-inner" style="justify-content:center; align-items:center;">
-                <div class="scrollable-content info-text-content" style="padding-top:2vh;">${teksTampil}</div>
+            <div class="padded-slide-inner" style="justify-content: center; align-items: flex-start; padding-left: 5vw; padding-right: 5vw;">
+                <div class="scrollable-content info-text-content" style="padding-top:2vh; text-align: left; white-space: pre-wrap; width: 100%;">${teksTampil}</div>
             </div>
         `
     });
-    // Geser urutan baris teks info berikutnya untuk putaran selanjutnya (jika mentok bawah, reset ke atas)
-    globalTextIndex = (globalTextIndex + 1) % arrayTeks.length;
+    globalTextIndex = (globalTextIndex + 1) % teksMurni.length;
 }
 
 function bersihkanAngka(teks) {
@@ -528,58 +524,51 @@ function formatMataUangAman(teks, sembunyikanJikaNol = false) {
 }
 
 function inisialisasiPerputaranPapan() {
-    clearTimeout(slideTimeout);
-    clearInterval(scrollInterval);
+    if (slideTimeout) clearTimeout(slideTimeout);
+    if (scrollInterval) clearInterval(scrollInterval);
     if (dataSlides.length === 0) return;
     currentSlideIndex = 0;
     jalankanSiklusSlider();
 }
 
 function jalankanSiklusSlider() {
-    const wadahPapan = document.getElementById('papan-slide-container');
-    if (!wadahPapan || isModeSholatBerlangsung) return;
+    if (isModeSholatBerlangsung || isModeMenungguIqamah || isJedaManual) return; 
+
+    const slideA = document.getElementById('slide-A');
+    const slideB = document.getElementById('slide-B');
+    if (!slideA || !slideB) return;
 
     let targetSlide = dataSlides[currentSlideIndex];
+    let kontainerBaru = menggunakanSlideA ? slideA : slideB;
+    let kontainerLama = menggunakanSlideA ? slideB : slideA;
 
-    // Bersihkan isi container dan injeksikan elemen slide baru tanpa class active terlebih dahulu
-    wadahPapan.innerHTML = `<div class="slide">${targetSlide.html}</div>`;
-    const elemenSlideBaru = wadahPapan.querySelector('.slide');
+    kontainerBaru.innerHTML = targetSlide.html;
 
-    // EFEK FADE IN (3 DETIK): Dijalankan sesaat setelah elemen di-render di dokumen HTML
     setTimeout(() => {
-        if (elemenSlideBaru) elemenSlideBaru.classList.add('active');
+        kontainerLama.classList.remove('active');
+        kontainerBaru.classList.add('active');
     }, 50);
 
-    // Memicu kelancaran auto-scroll di tengah masa tayang bersih
     setTimeout(() => {
         aktifkanAutoScrollKonten(targetSlide.durasi); 
     }, 1500);
 
-    // EFEK FADE OUT (3 DETIK): Dipicu tepat ketika durasi bersih tampil konten sudah habis
     slideTimeout = setTimeout(() => {
-        clearInterval(scrollInterval);
-        
-        // Menghapus kelas active untuk memicu transisi Opacity -> 0 (Fade Out) selama 3 detik halus
-        if (elemenSlideBaru) elemenSlideBaru.classList.remove('active');
+        if (scrollInterval) clearInterval(scrollInterval);
+        currentSlideIndex++;
+        menggunakanSlideA = !menggunakanSlideA;
 
-        // Tunggu transisi Fade Out selesai secara fisik (3000ms) sebelum memuat siklus halaman berikutnya
-        slideTimeout = setTimeout(() => {
-            currentSlideIndex++;
-            
-            // Jika satu putaran penuh antrian slide selesai, susun ulang antrian untuk mengambil 2 pasang data berikutnya
-            if (currentSlideIndex >= dataSlides.length) {
-                bangunStrukturSlideAntrian();
-            } else {
-                jalankanSiklusSlider();
-            }
-        }, 3000);
-
+        if (currentSlideIndex >= dataSlides.length) {
+            bangunStrukturSlideAntrian(); 
+        } else {
+            jalankanSiklusSlider(); 
+        }
     }, targetSlide.durasi); 
 }
 
 function aktifkanAutoScrollKonten(waktuTersisaMilidetik) {
-    const elemenScroll = document.querySelector('.scrollable-content');
-    if (!elemenScroll || isModeSholatBerlangsung) return;
+    const elemenScroll = document.querySelector('.active .scrollable-content');
+    if (!elemenScroll || isModeSholatBerlangsung || isModeMenungguIqamah) return;
 
     const totalJarakScroll = elemenScroll.scrollHeight - elemenScroll.clientHeight;
     
@@ -593,7 +582,7 @@ function aktifkanAutoScrollKonten(waktuTersisaMilidetik) {
             setTimeout(() => {
                 let waktuMulai = null;
                 function langkahScroll(timestamp) {
-                    if (isModeSholatBerlangsung) return;
+                    if (isModeSholatBerlangsung || isModeMenungguIqamah) return;
                     if (!waktuMulai) waktuMulai = timestamp;
                     let waktuBerjalan = timestamp - waktuMulai;
                     let kemajuanProgres = Math.min(waktuBerjalan / durasiScrollAktif, 1);
@@ -612,7 +601,6 @@ function aktifkanAutoScrollKonten(waktuTersisaMilidetik) {
 
 document.addEventListener('dblclick', () => {
     pancingIzinAudioBrowser();
-
     if (!document.fullscreenElement) {
         document.documentElement.requestFullscreen().catch(err => {
             console.error(`Gagal mengaktifkan Full Screen: ${err.message}`);
