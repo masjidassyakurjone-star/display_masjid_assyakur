@@ -262,7 +262,7 @@ body {
 .marquee-container { width: 100%; overflow: hidden; margin-top: 0.2vh; }
 #running-text { font-size: 2.3vh !important; color: #ffffff !important; font-weight: 600 !important; display: block !important; }
 
-/* LAYOUT PAPAN SLIDER KONTEN LAIN ASLI (KAS & GAMBAR TETAP NORMAL) */
+/* LAYOUT PAPAN SLIDER ASLI (KAS & GAMBAR TETAP NORMAL) */
 .padded-slide-inner { width: 100%; height: 100%; padding: 2vh 4vw; display: flex; flex-direction: column; }
 .slide-stretched-img { width: 100%; height: 100%; object-fit: contain; }
 .info-text-content { font-family: 'Times New Roman', Times, serif !important; font-size: 2.6vh !important; line-height: 1.5; color: #ffffff !important; font-weight: bold; white-space: pre-wrap; width: 100%; }
@@ -274,34 +274,34 @@ body {
 .text-right { text-align: right; }
 
 /* ==========================================================================
-   KHUSUS: ATURAN PENGATURAN TEKS JUMATAN AGAR DI TENAH & BESAR (ZYREX LOCK)
+   PERKECIL SETENGAHNYA: KHUSUS UKURAN FONT INFORMASI JUMATAN SAJA
    ========================================================================== */
 .judul-jumat-besar {
-    font-size: 4.8vh !important; 
+    font-size: 2.6vh !important; /* Dikecilkan dari 4.8vh (~setengahnya) */
     color: #f0d17b !important;
     font-weight: 800 !important;
     text-align: center !important;
-    letter-spacing: 0.2vh;
-    margin-bottom: 1vh !important;
+    letter-spacing: 0.1vh;
+    margin-bottom: 0.5vh !important;
 }
 
 .tanggal-jumat-besar {
-    font-size: 2.8vh !important; 
+    font-size: 1.8vh !important; /* Dikecilkan dari 2.8vh */
     color: #ffffff !important;
     font-weight: 600 !important;
     text-align: center !important;
-    margin-bottom: 3vh !important;
+    margin-bottom: 2vh !important;
 }
 
 .tabel-jumat-tv {
-    font-size: 3.4vh !important; 
-    width: 90% !important; 
+    font-size: 2.0vh !important; /* Dikecilkan dari 3.4vh agar tulisan pas */
+    width: 85% !important; 
     border-collapse: collapse !important;
     margin: 0 auto !important;
 }
 
 .tabel-jumat-tv td {
-    padding: 2vh 1vw !important; 
+    padding: 1.1vh 1vw !important; /* Jarak vertikal baris dirapatkan setengahnya */
 }
 
 .tabel-jumat-tv td:nth-child(1) {
@@ -309,7 +309,7 @@ body {
     font-weight: 700 !important;
     text-align: left !important;
     white-space: nowrap !important;
-    width: 38% !important;
+    width: 35% !important;
 }
 
 .tabel-jumat-tv td:nth-child(2) {
