@@ -160,22 +160,23 @@ setInterval(() => {
     }
 
     const elLabel = document.getElementById('countdown-title');
-    const elSholatName = document.getElementById('countdown-sholat');
-    const elWaktu = document.getElementById('countdown-time');
+    const elSholatJam = document.getElementById('countdown-sholat-jam');
+    const elCounterTime = document.getElementById('countdown-time-counter');
 
     let sisaDetik = sholatBerikutnya.targetDetik - sekarangDetik;
 
+    // Menyesuaikan format text dengan foto lama
     if (elLabel) {
-        elLabel.innerText = "MENUJU SHOLAT";
+        elLabel.innerText = `WAKTU SHOLAT ${sholatBerikutnya.isBesok ? 'SUBUH (BESOK)' : sholatBerikutnya.nama}`;
     }
-    if (elSholatName) {
-        elSholatName.innerText = sholatBerikutnya.isBesok ? 'SUBUH (BESOK)' : sholatBerikutnya.nama;
+    if (elSholatJam) {
+        elSholatJam.innerText = sholatBerikutnya.waktuStr;
     }
-    if (elWaktu) {
+    if (elCounterTime) {
         let jamSisa = String(Math.floor(sisaDetik / 3600)).padStart(2, '0');
         let menitSisa = String(Math.floor((sisaDetik % 3600) / 60)).padStart(2, '0');
         let detikSisa = String(sisaDetik % 60).padStart(2, '0');
-        elWaktu.innerText = `${jamSisa}:${menitSisa}:${detikSisa}`;
+        elCounterTime.innerText = `-${jamSisa}:${menitSisa}:${detikSisa}`;
     }
 
     if (sisaDetik === 7 && !sholatBerikutnya.isBesok && !isAlarmAdzanPlay) {
@@ -193,7 +194,7 @@ setInterval(() => {
         let jedaMenit = dataMasjidJeda[daftarSholat[i].nama] || 10;
         let batasIqamahDetik = jedaMenit * 60;
 
-        if (sekarangDetik >= adzanDetik &&sekarangDetik < adzanDetik + batasIqamahDetik) {
+        if (sekarangDetik >= adzanDetik && sekarangDetik < adzanDetik + batasIqamahDetik) {
             iqamahAktif = {
                 nama: daftarSholat[i].nama,
                 sisaDetik: (adzanDetik + batasIqamahDetik) - sekarangDetik
