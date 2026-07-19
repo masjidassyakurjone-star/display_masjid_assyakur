@@ -27,7 +27,7 @@ body {
     gap: 1.2vw;
 }
 
-/* 1. HEADER (Tinggi 10.5vh, Alamat sebaris penuh aman) */
+/* 1. HEADER */
 .main-header-portrait {
     display: flex;
     flex-direction: column;
@@ -70,7 +70,7 @@ body {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
 }
 
-/* 2. AREA WIDGET WAKTU & COUNTDOWN (3 BARIS VERTIKAL KIRI-KANAN) */
+/* 2. AREA WIDGET WAKTU & COUNTDOWN */
 .time-widget-row {
     display: flex;
     gap: 2vw;
@@ -93,7 +93,6 @@ body {
     width: 50%;
 }
 
-/* --- KIRI: CARD JAM DIGITAL --- */
 .card-clock-portrait { gap: 0.4vh; }
 .card-clock-portrait .clock-display {
     font-size: 4.2vh; 
@@ -107,7 +106,6 @@ body {
 .card-clock-portrait .date-display { font-size: 1.8vh; color: #ffffff; font-weight: 600; line-height: 1.2; width: 100%; white-space: nowrap; display: block; }
 .card-clock-portrait .hijri-display { font-size: 1.8vh; color: #f0d17b; font-weight: 700; line-height: 1.2; width: 100%; white-space: nowrap; display: block; }
 
-/* --- KANAN: CARD COUNTDOWN --- */
 .card-countdown-portrait { gap: 0.4vh; }
 .card-countdown-portrait .countdown-status {
     font-size: 1.7vh;
@@ -146,7 +144,7 @@ body {
     line-height: 1.1;
 }
 
-/* 3. PAPAN INFORMASI UTAMA (~60% Layar) */
+/* 3. PAPAN INFORMASI UTAMA */
 .main-papan-portrait {
     display: flex;
     flex-direction: column;
@@ -226,7 +224,7 @@ body {
 .rekening-info-block .bank-name { font-size: 1.4vh; color: #a2bcae; font-weight: 600; }
 .rekening-info-block .acc-number { font-size: 2.6vh; font-weight: 800; color: #3cf58d; line-height: 1.1; }
 
-/* 5. FOOTER RUNNING TEXT 2 BARIS VERTIKAL */
+/* 5. FOOTER RUNNING TEXT */
 .main-footer-portrait {
     background: rgba(0, 0, 0, 0.75);
     border: 0.2vh solid #d8b35a;
@@ -264,7 +262,7 @@ body {
 .marquee-container { width: 100%; overflow: hidden; margin-top: 0.2vh; }
 #running-text { font-size: 2.3vh !important; color: #ffffff !important; font-weight: 600 !important; display: block !important; }
 
-/* LAYOUT PAPAN SLIDER KONTEN ASLI (SAMA SEPERTI SEBELUMNYA) */
+/* LAYOUT PAPAN SLIDER KONTEN LAIN ASLI (KAS & GAMBAR TETAP NORMAL) */
 .padded-slide-inner { width: 100%; height: 100%; padding: 2vh 4vw; display: flex; flex-direction: column; }
 .slide-stretched-img { width: 100%; height: 100%; object-fit: contain; }
 .info-text-content { font-family: 'Times New Roman', Times, serif !important; font-size: 2.6vh !important; line-height: 1.5; color: #ffffff !important; font-weight: bold; white-space: pre-wrap; width: 100%; }
@@ -276,65 +274,55 @@ body {
 .text-right { text-align: right; }
 
 /* ==========================================================================
-   KHUSUS: PERBAIKAN UKURAN & POSISI SLIDE INFO JUMATAN SAJA (MENEMBUS HIERARKI)
+   KHUSUS: ATURAN PENGATURAN TEKS JUMATAN AGAR DI TENAH & BESAR (ZYREX LOCK)
    ========================================================================== */
-.slide:has(div > div:first-child) .padded-slide-inner,
-[data-tipe="TEKS_JUMAT"] .padded-slide-inner {
-    justify-content: center !important; 
-    align-items: center !important;     
-    padding: 3vh 4vw !important;
-}
-
-/* Judul Utama: SHOLAT JUMAT diperbesar maksimal */
-.slide:has(table:not(.table-kas)) div:first-child,
-[data-tipe="TEKS_JUMAT"] div:first-child {
+.judul-jumat-besar {
     font-size: 4.8vh !important; 
     color: #f0d17b !important;
     font-weight: 800 !important;
     text-align: center !important;
-    margin-bottom: 1.2vh !important;
     letter-spacing: 0.2vh;
+    margin-bottom: 1vh !important;
 }
 
-/* Sub-Judul: Tanggal & Waktu */
-.slide:has(table:not(.table-kas)) div:nth-child(2),
-[data-tipe="TEKS_JUMAT"] div:nth-child(2) {
+.tanggal-jumat-besar {
     font-size: 2.8vh !important; 
     color: #ffffff !important;
     font-weight: 600 !important;
     text-align: center !important;
-    margin-bottom: 5vh !important; 
+    margin-bottom: 3vh !important;
 }
 
-/* Ukuran Font Tabel Petugas Jumat */
-.slide:has(table:not(.table-kas)) table,
-[data-tipe="TEKS_JUMAT"] table {
+.tabel-jumat-tv {
     font-size: 3.4vh !important; 
-    width: 95% !important; 
+    width: 90% !important; 
+    border-collapse: collapse !important;
     margin: 0 auto !important;
 }
 
-/* Jarak baris vertikal nama petugas dilonggarkan */
-.slide:has(table:not(.table-kas)) td,
-[data-tipe="TEKS_JUMAT"] td {
-    padding: 2.2vh 1vw !important; 
+.tabel-jumat-tv td {
+    padding: 2vh 1vw !important; 
 }
 
-.slide:has(table:not(.table-kas)) td:nth-child(1),
-[data-tipe="TEKS_JUMAT"] td:nth-child(1) {
+.tabel-jumat-tv td:nth-child(1) {
     color: #a2bcae !important;
     font-weight: 700 !important;
+    text-align: left !important;
+    white-space: nowrap !important;
+    width: 38% !important;
 }
 
-.slide:has(table:not(.table-kas)) td:nth-child(2),
-[data-tipe="TEKS_JUMAT"] td:nth-child(2) {
+.tabel-jumat-tv td:nth-child(2) {
     color: #d8b35a !important;
+    text-align: center !important;
+    width: 5% !important;
 }
 
-.slide:has(table:not(.table-kas)) td:nth-child(3),
-[data-tipe="TEKS_JUMAT"] td:nth-child(3) {
+.tabel-jumat-tv td:nth-child(3) {
     color: #ffffff !important;
     font-weight: 800 !important;
+    text-align: left !important;
+    word-wrap: break-word !important;
 }
 
 #sholat-standby-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000000; z-index: 9999; }
