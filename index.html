@@ -4,17 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Display Masjid Assyakur - Portrait Monitor</title>
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Load CSS Eksternal -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- KONTAINER UTAMA SIGNAGE PORTRAIT -->
     <div class="signage-container-portrait">
         
-        <!-- HEADER (Alamat Sebaris Lurus) -->
+        <!-- HEADER -->
         <header class="main-header-portrait">
             <img src="logo.png" alt="Logo" class="logo-img-portrait">
             <div class="title-container-portrait">
@@ -23,24 +20,22 @@
             </div>
         </header>
 
-        <!-- AREA WIDGET ATAS -->
+        <!-- WIDGET AREA -->
         <section class="time-widget-row">
-            <!-- WIDGET KIRI: Waktu & Kalender -->
             <div class="card-portrait card-clock-portrait">
-                <div class="clock-display" id="clock-time">05:32:34</div>
-                <div class="date-display" id="clock-date">Minggu, 19 Juli 2026</div>
-                <div class="hijri-display" id="clock-hijri">2 Safar 1448 H</div>
+                <div class="clock-display" id="clock-time">--:--:--</div>
+                <div class="date-display" id="clock-date">Memuat Hari...</div>
+                <div class="hijri-display" id="clock-hijri">Memuat Hijriyah...</div>
             </div>
             
-            <!-- WIDGET KANAN: Countdown -->
             <div class="card-portrait card-countdown-portrait">
                 <div class="countdown-status" id="countdown-title">MENUJU SHOLAT</div>
-                <div class="countdown-sholat-name" id="countdown-sholat">DZUHUR</div>
-                <div class="time-main" id="countdown-time">00:17:35</div>
+                <div class="countdown-sholat-name" id="countdown-sholat">--</div>
+                <div class="time-main" id="countdown-time">--:--:--</div>
             </div>
         </section>
 
-        <!-- PAPAN INFORMASI MADING UTAMA (~60% Layar) -->
+        <!-- PAPAN INFORMASI MADING UTAMA -->
         <section class="main-papan-portrait">
             <div class="papan-header-portrait">PAPAN INFORMASI MASJID</div>
             <div class="papan-body-portrait">
@@ -58,7 +53,7 @@
             <button class="ctrl-btn" onclick="lanjutSlideManual()">Berikutnya ⏭️</button>
         </div>
 
-        <!-- REKENING INFAQ MODEL CARD -->
+        <!-- REKENING CARD -->
         <section class="card-rekening-portrait">
             <div class="rekening-title">INFAQ MASJID</div>
             <div class="rekening-info-block">
@@ -67,7 +62,7 @@
             </div>
         </section>
 
-        <!-- FOOTER RUNNING TEXT (Struktur 2 Baris Vertikal) -->
+        <!-- FOOTER RUNNING TEXT -->
         <footer class="main-footer-portrait">
             <div class="running-text-wrapper">
                 <div class="running-text-label">Kutipan Pilihan</div>
