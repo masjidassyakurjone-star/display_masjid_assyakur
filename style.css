@@ -107,12 +107,12 @@ body {
 .card-clock-portrait .date-display { font-size: 1.8vh; color: #ffffff; font-weight: 600; line-height: 1.2; width: 100%; white-space: nowrap; display: block; }
 .card-clock-portrait .hijri-display { font-size: 1.8vh; color: #f0d17b; font-weight: 700; line-height: 1.2; width: 100%; white-space: nowrap; display: block; }
 
-/* --- KANAN: CARD COUNTDOWN SESUAI FOTO LAMA --- */
+/* --- KANAN: CARD COUNTDOWN --- */
 .card-countdown-portrait { gap: 0.4vh; }
 .card-countdown-portrait .countdown-status {
     font-size: 1.7vh;
     font-weight: 700;
-    color: #d8b35a; /* Warna Emas */
+    color: #d8b35a; 
     letter-spacing: 0.05vh;
     white-space: nowrap;
     line-height: 1.1;
@@ -121,13 +121,12 @@ body {
 .card-countdown-portrait .countdown-sholat-time {
     font-size: 4.2vh;
     font-weight: 800;
-    color: #ffffff; /* Warna Putih Besar */
+    color: #ffffff; 
     letter-spacing: 0.1vh;
     white-space: nowrap;
     line-height: 1;
 }
 
-/* Kotak Merah Hitung Mundur */
 .countdown-box-red {
     border: 0.2vh solid #ff5252;
     background: rgba(255, 82, 82, 0.1);
@@ -142,7 +141,7 @@ body {
 .countdown-box-red span {
     font-size: 2.2vh;
     font-weight: 700;
-    color: #ff5252; /* Warna Merah Menyala */
+    color: #ff5252; 
     white-space: nowrap;
     line-height: 1.1;
 }
@@ -276,9 +275,10 @@ body {
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 
-/* LAYOUT TABEL JUMAT - DIPERBESAR & DI-CENTER UTK MONITOR ZYREX */
-[data-tipe="TEKS_JUMAT"] .padded-slide-inner, 
-.padded-slide-inner:has(table:not(.table-kas)) {
+/* ==========================================================================
+   KOREKSI TOTAL: LAYOUT KONTEN JUMATAN DIPERBESAR MAKSIMAL & DI-CENTER
+   ========================================================================== */
+.padded-slide-inner {
     display: flex !important;
     flex-direction: column !important;
     justify-content: center !important; 
@@ -288,61 +288,62 @@ body {
     padding: 3vh 4vw !important;
 }
 
-[data-tipe="TEKS_JUMAT"] div:first-child,
-.padded-slide-inner:has(table:not(.table-kas)) div:first-child {
-    font-size: 3.5vh !important; 
+/* Judul Utama: SHOLAT JUMAT */
+.padded-slide-inner > div:first-child {
+    font-size: 4.8vh !important; /* Dinaikkan signifikan agar besar dan jelas */
     color: #f0d17b !important;
     font-weight: 800 !important;
     text-align: center !important;
     width: 100% !important;
-    margin-bottom: 0.8vh !important;
-    letter-spacing: 0.1vh;
+    margin-bottom: 1.2vh !important;
+    letter-spacing: 0.2vh;
+    display: block !important;
 }
 
-[data-tipe="TEKS_JUMAT"] div:nth-child(2),
-.padded-slide-inner:has(table:not(.table-kas)) div:nth-child(2) {
-    font-size: 2.3vh !important; 
+/* Sub-Judul: Tanggal & Waktu */
+.padded-slide-inner > div:nth-child(2) {
+    font-size: 2.8vh !important; 
     color: #ffffff !important;
     font-weight: 600 !important;
     text-align: center !important;
     width: 100% !important;
-    margin-bottom: 4vh !important; 
+    margin-bottom: 5vh !important; 
+    display: block !important;
 }
 
-[data-tipe="TEKS_JUMAT"] table,
-.padded-slide-inner:has(table:not(.table-kas)) table {
-    font-size: 2.8vh !important; 
-    width: 90% !important; 
-    max-width: 100% !important;
+/* Pengaturan Struktur Tabel Petugas */
+.padded-slide-inner table {
+    font-size: 3.4vh !important; /* Ukuran font data nama petugas diperbesar penuh */
+    width: 95% !important; 
     border-collapse: collapse !important;
     margin: 0 auto !important;
 }
 
-[data-tipe="TEKS_JUMAT"] td:nth-child(1),
-.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(1) {
+/* Kolom Kiri: Jabatan */
+.padded-slide-inner td:nth-child(1) {
     text-align: left !important;
     font-weight: 700 !important;
     color: #a2bcae !important;
-    padding: 1.5vh 1vw 1.5vh 0 !important; 
+    padding: 2.2vh 1vw 2.2vh 0 !important; /* Baris diregangkan vertikal */
     white-space: nowrap !important;
-    width: 40% !important;
+    width: 38% !important;
 }
 
-[data-tipe="TEKS_JUMAT"] td:nth-child(2),
-.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(2) {
+/* Kolom Tengah: Titik Dua (:) */
+.padded-slide-inner td:nth-child(2) {
     text-align: center !important;
     font-weight: 700 !important;
     color: #d8b35a !important;
-    padding: 1.5vh 2vw !important;
+    padding: 2.2vh 2vw !important;
     width: 5% !important;
 }
 
-[data-tipe="TEKS_JUMAT"] td:nth-child(3),
-.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(3) {
+/* Kolom Kanan: Nama Lengkap Petugas */
+.padded-slide-inner td:nth-child(3) {
     text-align: left !important;
     font-weight: 800 !important; 
     color: #ffffff !important;
-    padding: 1.5vh 0 1.5vh 1vw !important;
+    padding: 2.2vh 0 2.2vh 1vw !important;
     word-wrap: break-word !important;
 }
 
