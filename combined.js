@@ -117,7 +117,7 @@ setInterval(() => {
     const sekarang = new Date();
     const jam = sekarang.getHours();     
     const menit = sekarang.getMinutes(); 
-    const detik = brassSekarang = sekarang.getSeconds(); 
+    const detik = sekarang.getSeconds(); 
     const sekarangDetik = (jam * 3600) + (menit * 60) + detik;
     
     if (document.getElementById('clock-time')) {
@@ -163,10 +163,8 @@ setInterval(() => {
     const elSholatName = document.getElementById('countdown-sholat');
     const elWaktu = document.getElementById('countdown-time');
 
-    let sisaDetikMenujuAdzan = sholatBerikutnya.targetDetik - agoraDetik = sekarangDetik;
     let sisaDetik = sholatBerikutnya.targetDetik - sekarangDetik;
 
-    // KOREKSI UTAMA: Sinkronisasi pembaruan 3 baris widget kanan tanpa merusak DOM
     if (elLabel) {
         elLabel.innerText = "MENUJU SHOLAT";
     }
@@ -180,7 +178,7 @@ setInterval(() => {
         elWaktu.innerText = `${jamSisa}:${menitSisa}:${detikSisa}`;
     }
 
-    if (sisaDetikMenujuAdzan === 7 && !sholatBerikutnya.isBesok && !isAlarmAdzanPlay) {
+    if (sisaDetik === 7 && !sholatBerikutnya.isBesok && !isAlarmAdzanPlay) {
         isAlarmAdzanPlay = true;
         triggerAlarm('adzan');
         setTimeout(() => { isAlarmAdzanPlay = false; }, 10000);
