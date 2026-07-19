@@ -193,7 +193,7 @@ setInterval(() => {
         let jedaMenit = dataMasjidJeda[daftarSholat[i].nama] || 10;
         let batasIqamahDetik = jedaMenit * 60;
 
-        if (sekarangDetik >= adzanDetik && sekarangDetik < adzanDetik + batasIqamahDetik) {
+        if (sekarangDetik >= adzanDetik &&sekarangDetik < adzanDetik + batasIqamahDetik) {
             iqamahAktif = {
                 nama: daftarSholat[i].nama,
                 sisaDetik: (adzanDetik + batasIqamahDetik) - sekarangDetik
