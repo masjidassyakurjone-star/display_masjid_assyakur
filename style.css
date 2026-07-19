@@ -264,7 +264,7 @@ body {
 .marquee-container { width: 100%; overflow: hidden; margin-top: 0.2vh; }
 #running-text { font-size: 2.3vh !important; color: #ffffff !important; font-weight: 600 !important; display: block !important; }
 
-/* LAYOUT PAPAN SLIDER KONTEN */
+/* LAYOUT PAPAN SLIDER KONTEN ASLI (SAMA SEPERTI SEBELUMNYA) */
 .padded-slide-inner { width: 100%; height: 100%; padding: 2vh 4vw; display: flex; flex-direction: column; }
 .slide-stretched-img { width: 100%; height: 100%; object-fit: contain; }
 .info-text-content { font-family: 'Times New Roman', Times, serif !important; font-size: 2.6vh !important; line-height: 1.5; color: #ffffff !important; font-weight: bold; white-space: pre-wrap; width: 100%; }
@@ -276,75 +276,65 @@ body {
 .text-right { text-align: right; }
 
 /* ==========================================================================
-   KOREKSI TOTAL: LAYOUT KONTEN JUMATAN DIPERBESAR MAKSIMAL & DI-CENTER
+   KHUSUS: PERBAIKAN UKURAN & POSISI SLIDE INFO JUMATAN SAJA (MENEMBUS HIERARKI)
    ========================================================================== */
-.padded-slide-inner {
-    display: flex !important;
-    flex-direction: column !important;
+.slide:has(div > div:first-child) .padded-slide-inner,
+[data-tipe="TEKS_JUMAT"] .padded-slide-inner {
     justify-content: center !important; 
     align-items: center !important;     
-    height: 100% !important;
-    width: 100% !important;
     padding: 3vh 4vw !important;
 }
 
-/* Judul Utama: SHOLAT JUMAT */
-.padded-slide-inner > div:first-child {
-    font-size: 4.8vh !important; /* Dinaikkan signifikan agar besar dan jelas */
+/* Judul Utama: SHOLAT JUMAT diperbesar maksimal */
+.slide:has(table:not(.table-kas)) div:first-child,
+[data-tipe="TEKS_JUMAT"] div:first-child {
+    font-size: 4.8vh !important; 
     color: #f0d17b !important;
     font-weight: 800 !important;
     text-align: center !important;
-    width: 100% !important;
     margin-bottom: 1.2vh !important;
     letter-spacing: 0.2vh;
-    display: block !important;
 }
 
 /* Sub-Judul: Tanggal & Waktu */
-.padded-slide-inner > div:nth-child(2) {
+.slide:has(table:not(.table-kas)) div:nth-child(2),
+[data-tipe="TEKS_JUMAT"] div:nth-child(2) {
     font-size: 2.8vh !important; 
     color: #ffffff !important;
     font-weight: 600 !important;
     text-align: center !important;
-    width: 100% !important;
     margin-bottom: 5vh !important; 
-    display: block !important;
 }
 
-/* Pengaturan Struktur Tabel Petugas */
-.padded-slide-inner table {
-    font-size: 3.4vh !important; /* Ukuran font data nama petugas diperbesar penuh */
+/* Ukuran Font Tabel Petugas Jumat */
+.slide:has(table:not(.table-kas)) table,
+[data-tipe="TEKS_JUMAT"] table {
+    font-size: 3.4vh !important; 
     width: 95% !important; 
-    border-collapse: collapse !important;
     margin: 0 auto !important;
 }
 
-/* Kolom Kiri: Jabatan */
-.padded-slide-inner td:nth-child(1) {
-    text-align: left !important;
-    font-weight: 700 !important;
+/* Jarak baris vertikal nama petugas dilonggarkan */
+.slide:has(table:not(.table-kas)) td,
+[data-tipe="TEKS_JUMAT"] td {
+    padding: 2.2vh 1vw !important; 
+}
+
+.slide:has(table:not(.table-kas)) td:nth-child(1),
+[data-tipe="TEKS_JUMAT"] td:nth-child(1) {
     color: #a2bcae !important;
-    padding: 2.2vh 1vw 2.2vh 0 !important; /* Baris diregangkan vertikal */
-    white-space: nowrap !important;
-    width: 38% !important;
-}
-
-/* Kolom Tengah: Titik Dua (:) */
-.padded-slide-inner td:nth-child(2) {
-    text-align: center !important;
     font-weight: 700 !important;
-    color: #d8b35a !important;
-    padding: 2.2vh 2vw !important;
-    width: 5% !important;
 }
 
-/* Kolom Kanan: Nama Lengkap Petugas */
-.padded-slide-inner td:nth-child(3) {
-    text-align: left !important;
-    font-weight: 800 !important; 
+.slide:has(table:not(.table-kas)) td:nth-child(2),
+[data-tipe="TEKS_JUMAT"] td:nth-child(2) {
+    color: #d8b35a !important;
+}
+
+.slide:has(table:not(.table-kas)) td:nth-child(3),
+[data-tipe="TEKS_JUMAT"] td:nth-child(3) {
     color: #ffffff !important;
-    padding: 2.2vh 0 2.2vh 1vw !important;
-    word-wrap: break-word !important;
+    font-weight: 800 !important;
 }
 
 #sholat-standby-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000000; z-index: 9999; }
