@@ -4,14 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Display Masjid Assyakur - Portrait Monitor</title>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Load CSS Eksternal -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+    <!-- KONTAINER UTAMA SIGNAGE PORTRAIT -->
     <div class="signage-container-portrait">
         
-        <!-- HEADER -->
+        <!-- HEADER (Alamat Sebaris Lurus) -->
         <header class="main-header-portrait">
             <img src="logo.png" alt="Logo" class="logo-img-portrait">
             <div class="title-container-portrait">
@@ -20,14 +23,16 @@
             </div>
         </header>
 
-        <!-- WIDGET AREA -->
+        <!-- AREA WIDGET ATAS -->
         <section class="time-widget-row">
+            <!-- WIDGET KIRI: Waktu & Kalender -->
             <div class="card-portrait card-clock-portrait">
                 <div class="clock-display" id="clock-time">--:--:--</div>
                 <div class="date-display" id="clock-date">Memuat Hari...</div>
                 <div class="hijri-display" id="clock-hijri">Memuat Hijriyah...</div>
             </div>
             
+            <!-- WIDGET KANAN: Countdown -->
             <div class="card-portrait card-countdown-portrait">
                 <div class="countdown-status" id="countdown-title">MENUJU SHOLAT</div>
                 <div class="countdown-sholat-name" id="countdown-sholat">--</div>
@@ -35,7 +40,7 @@
             </div>
         </section>
 
-        <!-- PAPAN INFORMASI MADING UTAMA -->
+        <!-- PAPAN INFORMASI MADING UTAMA (~60% Layar) -->
         <section class="main-papan-portrait">
             <div class="papan-header-portrait">PAPAN INFORMASI MASJID</div>
             <div class="papan-body-portrait">
@@ -53,7 +58,7 @@
             <button class="ctrl-btn" onclick="lanjutSlideManual()">Berikutnya ⏭️</button>
         </div>
 
-        <!-- REKENING CARD -->
+        <!-- REKENING INFAQ MODEL CARD -->
         <section class="card-rekening-portrait">
             <div class="rekening-title">INFAQ MASJID</div>
             <div class="rekening-info-block">
