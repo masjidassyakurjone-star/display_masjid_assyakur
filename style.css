@@ -70,7 +70,7 @@ body {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.9);
 }
 
-/* 2. AREA WIDGET WAKTU & COUNTDOWN (3 BARIS VERTIKAL) */
+/* 2. AREA WIDGET WAKTU & COUNTDOWN (3 BARIS VERTIKAL KIRI-KANAN) */
 .time-widget-row {
     display: flex;
     gap: 2vw;
@@ -247,28 +247,82 @@ body {
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 
-/* TABEL JUMAT */
+/* ==========================================================================
+   LAYOUT TABEL JUMAT - DIPERBESAR & DI-CENTER UTK MONITOR ZYREX
+   ========================================================================== */
 [data-tipe="TEKS_JUMAT"] .padded-slide-inner, 
 .padded-slide-inner:has(table:not(.table-kas)) {
-    display: flex !important; flex-direction: column !important; justify-content: center !important; align-items: center !important; height: 100% !important; padding: 2vh 5vw !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; 
+    align-items: center !important;     
+    height: 100% !important;
+    width: 100% !important;
+    padding: 3vh 4vw !important;
 }
+
+/* Judul UTAMA: SHOLAT JUMAT */
 [data-tipe="TEKS_JUMAT"] div:first-child,
 .padded-slide-inner:has(table:not(.table-kas)) div:first-child {
-    font-size: 2.2vh !important; color: #f0d17b !important; font-weight: 800 !important; text-align: center !important; white-space: nowrap !important; overflow: hidden; text-overflow: ellipsis; width: 100% !important; margin-bottom: 0.5vh !important;
+    font-size: 3.5vh !important; 
+    color: #f0d17b !important;
+    font-weight: 800 !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-bottom: 0.8vh !important;
+    letter-spacing: 0.1vh;
 }
+
+/* Sub-Judul: Tanggal & Jam */
 [data-tipe="TEKS_JUMAT"] div:nth-child(2),
 .padded-slide-inner:has(table:not(.table-kas)) div:nth-child(2) {
-    font-size: 1.9vh !important; color: #ffffff !important; font-weight: 600 !important; text-align: center !important; white-space: nowrap !important; overflow: hidden; text-overflow: ellipsis; width: 100% !important; margin-bottom: 3vh !important; 
+    font-size: 2.3vh !important; 
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-bottom: 4vh !important; 
 }
+
+/* Pengaturan Kotak Tabel Petugas */
 [data-tipe="TEKS_JUMAT"] table,
 .padded-slide-inner:has(table:not(.table-kas)) table {
-    font-size: 2.3vh !important; width: auto !important; min-width: 85% !important; max-width: 100% !important; border-collapse: collapse !important; margin: 0 auto !important; 
+    font-size: 2.8vh !important; 
+    width: 90% !important; 
+    max-width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 0 auto !important;
 }
+
+/* Kolom Kiri: Jabatan (Khatib, Imam, Bilal) */
 [data-tipe="TEKS_JUMAT"] td:nth-child(1),
-.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(1) { text-align: left !important; font-weight: 700 !important; color: #a2bcae !important; padding: 0.8vh 1vw 0.8vh 0 !important; white-space: nowrap !important; width: 30% !important; }
+.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(1) {
+    text-align: left !important;
+    font-weight: 700 !important;
+    color: #a2bcae !important;
+    padding: 1.5vh 1vw 1.5vh 0 !important; 
+    white-space: nowrap !important;
+    width: 40% !important;
+}
+
+/* Kolom Tengah: Titik Dua (:) */
 [data-tipe="TEKS_JUMAT"] td:nth-child(2),
-.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(2) { text-align: center !important; font-weight: 700 !important; color: #d8b35a !important; padding: 0.8vh 1.5vw !important; width: 5% !important; }
+.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(2) {
+    text-align: center !important;
+    font-weight: 700 !important;
+    color: #d8b35a !important;
+    padding: 1.5vh 2vw !important;
+    width: 5% !important;
+}
+
+/* Kolom Kanan: Nama-Nama Petugas */
 [data-tipe="TEKS_JUMAT"] td:nth-child(3),
-.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(3) { text-align: left !important; font-weight: 700 !important; color: #ffffff !important; padding: 0.8vh 0 0.8vh 1vw !important; word-wrap: break-word !important; }
+.padded-slide-inner:has(table:not(.table-kas)) td:nth-child(3) {
+    text-align: left !important;
+    font-weight: 800 !important; 
+    color: #ffffff !important;
+    padding: 1.5vh 0 1.5vh 1vw !important;
+    word-wrap: break-word !important;
+}
 
 #sholat-standby-overlay { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000000; z-index: 9999; }
