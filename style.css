@@ -83,7 +83,7 @@ body {
     background: rgba(7, 30, 20, 0.78); 
     border: 0.25vh solid #d8b35a; 
     border-radius: 1.2vh;
-    padding: 1vh;
+    padding: 0.8vh 1vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -93,7 +93,8 @@ body {
     width: 50%;
 }
 
-.card-clock-portrait { gap: 0.6vh; }
+/* --- KIRI: CARD JAM DIGITAL --- */
+.card-clock-portrait { gap: 0.4vh; }
 .card-clock-portrait .clock-display {
     font-size: 4.2vh; 
     font-weight: 800;
@@ -106,16 +107,44 @@ body {
 .card-clock-portrait .date-display { font-size: 1.8vh; color: #ffffff; font-weight: 600; line-height: 1.2; width: 100%; white-space: nowrap; display: block; }
 .card-clock-portrait .hijri-display { font-size: 1.8vh; color: #f0d17b; font-weight: 700; line-height: 1.2; width: 100%; white-space: nowrap; display: block; }
 
-.card-countdown-portrait { gap: 0.6vh; }
-.card-countdown-portrait .countdown-status { font-size: 1.6vh; font-weight: 700; color: #f0d17b; letter-spacing: 0.05vh; white-space: nowrap; }
-.card-countdown-portrait .countdown-sholat-name { font-size: 2.4vh; font-weight: 800; color: #ffffff; letter-spacing: 0.1vh; white-space: nowrap; }
-.card-countdown-portrait .time-main {
-    font-size: 4.2vh; 
-    font-weight: 800;
-    color: #3cf58d;
-    text-shadow: 0 0 1.5vh rgba(60, 245, 141, 0.4);
-    line-height: 1;
+/* --- KANAN: CARD COUNTDOWN SESUAI FOTO LAMA --- */
+.card-countdown-portrait { gap: 0.4vh; }
+.card-countdown-portrait .countdown-status {
+    font-size: 1.7vh;
+    font-weight: 700;
+    color: #d8b35a; /* Warna Emas */
+    letter-spacing: 0.05vh;
     white-space: nowrap;
+    line-height: 1.1;
+}
+
+.card-countdown-portrait .countdown-sholat-time {
+    font-size: 4.2vh;
+    font-weight: 800;
+    color: #ffffff; /* Warna Putih Besar */
+    letter-spacing: 0.1vh;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+/* Kotak Merah Hitung Mundur */
+.countdown-box-red {
+    border: 0.2vh solid #ff5252;
+    background: rgba(255, 82, 82, 0.1);
+    border-radius: 0.6vh;
+    padding: 0.2vh 3vw;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.2vh;
+}
+
+.countdown-box-red span {
+    font-size: 2.2vh;
+    font-weight: 700;
+    color: #ff5252; /* Warna Merah Menyala */
+    white-space: nowrap;
+    line-height: 1.1;
 }
 
 /* 3. PAPAN INFORMASI UTAMA (~60% Layar) */
@@ -247,9 +276,7 @@ body {
 .text-center { text-align: center; }
 .text-right { text-align: right; }
 
-/* ==========================================================================
-   LAYOUT TABEL JUMAT - DIPERBESAR & DI-CENTER UTK MONITOR ZYREX
-   ========================================================================== */
+/* LAYOUT TABEL JUMAT - DIPERBESAR & DI-CENTER UTK MONITOR ZYREX */
 [data-tipe="TEKS_JUMAT"] .padded-slide-inner, 
 .padded-slide-inner:has(table:not(.table-kas)) {
     display: flex !important;
@@ -261,7 +288,6 @@ body {
     padding: 3vh 4vw !important;
 }
 
-/* Judul UTAMA: SHOLAT JUMAT */
 [data-tipe="TEKS_JUMAT"] div:first-child,
 .padded-slide-inner:has(table:not(.table-kas)) div:first-child {
     font-size: 3.5vh !important; 
@@ -273,7 +299,6 @@ body {
     letter-spacing: 0.1vh;
 }
 
-/* Sub-Judul: Tanggal & Jam */
 [data-tipe="TEKS_JUMAT"] div:nth-child(2),
 .padded-slide-inner:has(table:not(.table-kas)) div:nth-child(2) {
     font-size: 2.3vh !important; 
@@ -284,7 +309,6 @@ body {
     margin-bottom: 4vh !important; 
 }
 
-/* Pengaturan Kotak Tabel Petugas */
 [data-tipe="TEKS_JUMAT"] table,
 .padded-slide-inner:has(table:not(.table-kas)) table {
     font-size: 2.8vh !important; 
@@ -294,7 +318,6 @@ body {
     margin: 0 auto !important;
 }
 
-/* Kolom Kiri: Jabatan (Khatib, Imam, Bilal) */
 [data-tipe="TEKS_JUMAT"] td:nth-child(1),
 .padded-slide-inner:has(table:not(.table-kas)) td:nth-child(1) {
     text-align: left !important;
@@ -305,7 +328,6 @@ body {
     width: 40% !important;
 }
 
-/* Kolom Tengah: Titik Dua (:) */
 [data-tipe="TEKS_JUMAT"] td:nth-child(2),
 .padded-slide-inner:has(table:not(.table-kas)) td:nth-child(2) {
     text-align: center !important;
@@ -315,7 +337,6 @@ body {
     width: 5% !important;
 }
 
-/* Kolom Kanan: Nama-Nama Petugas */
 [data-tipe="TEKS_JUMAT"] td:nth-child(3),
 .padded-slide-inner:has(table:not(.table-kas)) td:nth-child(3) {
     text-align: left !important;
