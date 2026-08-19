@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Display Masjid Assyakur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Montserrat:wght@600;700;800&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="signage-base">
+        <!-- HEADER: mengikuti komposisi dasar contoh, menyatu dengan foto -->
+        <header class="brand-header">
+            <img src="logo.png" alt="Logo Masjid Assyakur" class="brand-logo">
+            <div class="brand-copy">
+                <h1>MASJID ASSYAKUR</h1>
+                <div class="brand-address">
+                    <div class="address-text">
+                        <span>Perumahan Pesona Aqila Regency Jone, GG. Makassar</span>
+                        <span>RT. 016 Desa Jone, TANAH GROGOT</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- PANEL KIRI BAWAH: SHOLAT BERIKUTNYA -->
+        <section class="next-card" aria-label="Waktu sholat berikutnya">
+            <div class="next-head">WAKTU SHOLAT BERIKUTNYA</div>
+            <div class="next-prayer-name" id="countdown-title">--</div>
+            <div class="next-prayer-time">
+                <span id="countdown-sholat-jam">--:--</span><span class="wita-label">WITA</span>
+            </div>
+            <div class="next-countdown" id="countdown-time-counter">--:--:--</div>
+        </section>
+
+        <!-- PANEL KANAN BAWAH: JAM & KALENDER -->
+        <section class="now-card" aria-label="Waktu Indonesia Tengah">
+            <div class="now-head">WAKTU INDONESIA TENGAH</div>
+            <div class="now-clock" id="clock-time">--:--:--</div>
+            <div class="now-divider"></div>
+            <div class="now-info-row"><span id="clock-date">Memuat Hari...</span></div>
+            <div class="now-info-row hijri-row"><span id="clock-hijri">Memuat Hijriyah...</span></div>
+        </section>
+
+        <!-- MODE INFO SHOLAT JUMAT -->
+        <section id="jumat-mode-overlay" class="jumat-mode-overlay" aria-hidden="true">
+            <div class="jumat-mode-content" id="jumat-mode-content"></div>
+        </section>
+
+        <!-- MODE KAS / KEUANGAN -->
+        <section id="kas-mode-overlay" class="kas-mode-overlay" aria-hidden="true">
+            <div id="kas-mode-content" class="kas-mode-content"></div>
+        </section>
+
+        <!-- RUNNING TEXT -->
+        <footer class="running-bar">
+            <div class="running-label">KUTIPAN PILIHAN</div>
+            <div class="running-track">
+                <marquee id="running-text" scrollamount="5" scrolldelay="35">
+                    Memuat isi kutipan...
+                </marquee>
+            </div>
+        </footer>
+
+    </main>
+
+    <script src="jadwal_db.js"></script>
+    <script src="combined.js"></script>
+</body>
+</html>
